@@ -3,7 +3,7 @@
 %     ● Implementasi rule-rule kendali dasar (start, help ,quit, inventory, dll)
 :- dynamic(game_started/1).
 
-game_started(false)
+game_started(false).
 
 start :-
     ['map.pl'],
