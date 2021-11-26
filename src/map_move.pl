@@ -24,6 +24,9 @@ map_size(14,17).
 
 isWallTile(X,Y):- X=:=0;Y=:=0;X=:=15;Y=:=18. 
 
+%toGetWalk buat ngelarang pemain ke tile tertentu
+toGetWalk(X,Y):- \+tile_water(X,Y),\+isWallTile(X,Y),\+place('Q',X,Y).
+
 % MAP
 % RIGHT BORDER
 draw_point(X, Y) :- map_size(W, H),
@@ -111,37 +114,49 @@ map :- draw_point(0,0).
 
 w :- player(X,Y),W is Y-1,
 	(
-		\+tile_water(X,W),\+isWallTile(X,W) ->
+		toGetWalk(X,W) ->
 			retract(player(X,Y)),assertz(player(X,W));
 		tile_water(X,W) -> 
 			write('Hati Hati Bos ada air!'),nl;
 		isWallTile(X,W) ->
-			write('Ada Tembok Bos!'),nl
+			write('Ada Tembok Bos!'),nl;
+		place('Q',X,W) ->
+			retract(player(X,Y)),assertz(player(X,W)),
+			write('Ketik "quest" untuk Mendapatkan quest baru'),nl
 	),map.
 s :- player(X,Y),S is Y+1,
 	(
-		\+tile_water(X,S),\+isWallTile(X,S) ->
+		toGetWalk(X,S) ->
 			retract(player(X,Y)),assertz(player(X,S));
 		tile_water(X,S) -> 
 			write('Hati Hati Bos ada air!'),nl;
 		isWallTile(X,S) ->
-			write('Ada Tembok Bos!'),nl
+			write('Ada Tembok Bos!'),nl;
+		place('Q',X,S) ->
+			retract(player(X,Y)),assertz(player(X,S)),
+			write('Ketik "quest" untuk Mendapatkan quest baru'),nl
 	),map.
 a :- player(X,Y),A is X-1,
 	(
-		\+tile_water(A,Y),\+isWallTile(A,Y) ->
+		toGetWalk(A,Y) ->
 			retract(player(X,Y)),assertz(player(A,Y));
 		tile_water(A,Y) -> 
 			write('Hati Hati Bos ada air!'),nl;
 		isWallTile(A,Y) ->
-			write('Ada Tembok Bos!'),nl
+			write('Ada Tembok Bos!'),nl;
+		place('Q',A,Y) ->
+			retract(player(X,Y)),assertz(player(A,Y)),
+			write('Ketik "quest" untuk Mendapatkan quest baru'),nl
 	),map.
 d :- player(X,Y),D is X+1,
 	(
-		\+tile_water(D,Y),\+isWallTile(D,Y) ->
+		toGetWalk(D,Y) ->
 			retract(player(X,Y)),assertz(player(D,Y));
 		tile_water(D,Y) -> 
 			write('Hati Hati Bos ada air!'),nl;
 		isWallTile(D,Y) ->
-			write('Ada Tembok Bos!'),nl
+			write('Ada Tembok Bos!'),nl;
+		place('Q',D,Y) ->
+			retract(player(X,Y)),assertz(player(D,Y)),
+			write('Ketik "quest" untuk Mendapatkan quest baru'),nl
 	),map.
