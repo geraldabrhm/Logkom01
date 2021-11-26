@@ -44,10 +44,13 @@ harvestingQ :- listQuest(harvesting,HarvestValue),
                     write('0 harvest item'),nl
                 ).
 
-mainQuest:-
+quest:-
     haveQuest(Bool),
         (Bool = no -> 
-            takeQuest;
+            takeQuest,
+            ranchingQ,
+            fishingQ,
+            harvestingQ;
         Bool = yes ->
             write('Misi yang lain di selesain dulu yaaa SEMANGAT!!!'),nl,
             ranchingQ,
