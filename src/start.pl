@@ -7,9 +7,17 @@ game_started(false).
 
 start :-
     ['map.pl'],
+	['move.pl'],
     ['inventory.pl'],
     ['help.pl'],
     ['interface.pl'],
+	['quest.pl'],
+	%['player.pl'],
+	%['market.pl'],
+	%['house.pl'],
+	%['farm.pl'],
+	%['ranch.pl'],
+	%['fish.pl'],
 
     retract(game_started(false)), !,
     asserta(game_started(true)),
@@ -21,9 +29,11 @@ start :-
     write('3. Rancher'),nl.
 
     read(Job),
-    ((Job =:= 1 -> Fisherman(true));
-    (Job =:= 2 -> Farmer(true));
-    (Job =:= 3 -> Rancher(true))).
+    (
+	Job =:= 1 -> Fisherman(true);
+    Job =:= 2 -> Farmer(true);
+    Job =:= 3 -> Rancher(true)
+	).
 
 start :-
     write('The game already started. Use command \'help.\' for guide'),nl.
@@ -32,7 +42,7 @@ quit :-
     game_started(true),
     write('Are you sure (y/n)?'),nl,
     read(Quit),
-    (Quit == y -> halt;
-    (Quit == n -> fail)).
-    
-
+    (
+	Quit == y -> halt;
+    Quit == n -> fail
+	).
