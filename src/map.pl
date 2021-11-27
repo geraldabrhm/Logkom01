@@ -2,7 +2,8 @@
 %     ● Fakta-fakta terkait peta dan pemain
 %     ● Implementasi rule-rule kendali dasar start, help ,quit, inventory, dll
 
-/** Map ukuran 10 X 10 **/
+:- dynamic(isWallTile/2).
+
 /* Initial Map */
 /* M: Marketplace, R: Ranch, H: House, Q: Tempat pengambilan quest, o: Tile air, =: Digged tile */
 % ############
@@ -18,44 +19,96 @@
 % #-------M--#
 % ############
 
-sizeMap(11,11).
+place('H',7,6).
+place('Q',7,3).
+place('F',11,4).
+place('R',10,5).
+place('M',10,12).
+tile_water(5,8).
+tile_water(6,8).
+tile_water(7,8).
+tile_water(4,9).
+tile_water(5,9).
+tile_water(6,9).
+tile_water(7,9).
+tile_water(8,9).
+tile_water(5,10).
+tile_water(6,10).
+tile_water(7,10).
+map_size(14,17).
 
-% border kiri
-drawMap(X,Y) :- sizeMap(_,T),
-                X =:= 0,
-                Y =< T+1,
-                write('# '),
-                NewX is X+1,
-                drawMap(NewX,Y).
+isWallTile(X,Y):- X=:=0;Y=:=0;X=:=15;Y=:=18. 
 
-%border atas
-drawMap(X,Y) :- sizeMap(P,_),
-                Y =:= 0,
-                X < P + 1,
-                X > P+1,
-                write('# '),
-                NewX is X+1,
-                drawMap(NewX,Y).
+% MAP
+% RIGHT BORDER
+draw_point(X, Y) :- map_size(W, H),
+					X =:= W + 1,
+					Y =< H + 1,
+					write('#'), nl,
+					NewY is Y+1,
+					draw_point(0, NewY).
+% LEFT BORDER	
+draw_point(X, Y) :- map_size(_, H),
+					X =:= 0,
+					Y =< H+1,
+					write('#'),
+					NewX is X+1,
+					draw_point(NewX, Y).
+% TOP BORDER			
+draw_point(X, Y) :- map_size(W, _),
+					X < W + 1,
+					X > 0,
+					Y =:= 0,
+					write('#'),
+					NewX is X+1,
+					draw_point(NewX, Y).
+% BOTTOM BORDER								
+draw_point(X, Y) :- map_size(W, H),
+					X < W + 1,
+					X > 0,
+					Y =:= H + 1,
+					write('#'),
+					NewX is X+1,
+					draw_point(NewX, Y).					
+% MAP INSIDE
+draw_point(X, Y) :- map_size(W, H),
+					X < W + 1,
+					X > 0,
+					Y < H + 1,
+					Y > 0,
+					player(X,Y), !,
+					write('P'),
+					NewX is X+1,
+					draw_point(NewX, Y).					
+draw_point(X, Y) :- map_size(W, H),
+					X < W + 1,
+					X > 0,
+					Y < H + 1,
+					Y > 0,
+					place(Obj, X, Y), !,
+					write(Obj),
+					NewX is X+1,
+					draw_point(NewX, Y).
+draw_point(X, Y) :- map_size(W, H),
+					X < W + 1,
+					X > 0,
+					Y < H + 1,
+					Y > 0,
+					tile_water(X,Y), !,
+					write('o'),
+					NewX is X+1,
+					draw_point(NewX, Y).
+% EMPTY TILE					
+draw_point(X, Y) :- map_size(W, H),
+					X < W + 1,
+					X > 0,
+					Y < H + 1,
+					Y > 0,
+					(\+ player(X, Y)),
+					(\+ place(_, X, Y)),
+					(\+ tile_water(X, Y)),
+					write('-'),
+					NewX is X+1,
+					draw_point(NewX, Y).
 
-%border kanan
-drawMap(X,Y) :- sizeMap(P,T),
-                X =:= P,
-                Y =< T+1,
-                
-                write('# '), nl,
-                NewY is Y+1,
-                drawMap(X,NewY).
-
-%border bawah
-drawMap(X,Y) :- sizeMap(P,T),
-                X =:= T,
-                Y =< T+1,
-                
-                write('# '), nl,
-                NewY is Y+1,
-                drawMap(X,NewY).
-
-draw:-drawMap(0,0).
-
-
-
+map :- draw_point(0,0).
