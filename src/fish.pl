@@ -1,3 +1,4 @@
+level(1).
 % Cek posisi player
 isCanFish :- 
 	player(X,Y), W is Y-1, tile_water(X,W), !;
@@ -7,11 +8,11 @@ isCanFish :-
 
 % Belum add EXP
 addCatfish :-
-	retract(item(1,catfish,X,75,0,0)), NewX is X+1, assertz(item(1,catfish,NewX,75,0,0)).
+	addItem(1,1).
 addSalmon :-
-	retract(item(2,salmon,X,150,0,0)), NewX is X+1, assertz(item(2,salmon,NewX,150,0,0)).
+	addItem(2,1).
 addTuna :-
-	retract(item(3,tuna,X,250,0,0)), NewX is X+1, assertz(item(3,tuna,NewX,250,0,0)).
+	addItem(3,1).
 
 % Kondisi Fishing tiap level
 fish1 :- 

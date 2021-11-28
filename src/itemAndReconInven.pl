@@ -99,8 +99,10 @@ displayMarket([HiD|TiD]):-
 
 addItem(Id,Banyak):-
     banyakItem(Caps),
-    item(Id,Nama,Amount,HargaJ,HargaB,Level),
-    A is Amount+Banyak,
+    (\+inven(Id,_,_,_,_,_) -> item(Id,Nama,Amount,HargaJ,HargaB,Level);
+	inven(Id,Nama,X,HargaJ,HargaB,Level) -> Amount is X
+    ),
+	A is Amount+Banyak,
     NewCaps is A + Caps,
     (NewCaps =< 100 ->
         (\+inven(Id,_,_,_,_,_) -> 
