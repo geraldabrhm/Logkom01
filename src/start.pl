@@ -14,10 +14,10 @@ start :-
     ['interface.pl'],
     ['quest.pl'],
     %['player.pl'],
-    %['market.pl'],
+    ['marketplace.pl'],
     %['house.pl'],
     %['farm.pl'],
-    %['ranch.pl'],
+    ['ranch.pl'],
     ['fish.pl'],
 
     retract(game_started(false)), !,
