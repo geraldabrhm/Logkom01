@@ -1,8 +1,6 @@
-%:- include(itemAndReconInven) [Butuh ini]
 
 :- dynamic(lvlRanching/1).
 :- dynamic(expRanching/1).
-:- dynamic(item/6).
 :- dynamic(timeToExploit/1).
 :- dynamic(collOfRanchItem/3).
 :- dynamic(timeRanch/1).

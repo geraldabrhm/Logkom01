@@ -23,9 +23,9 @@ kapasitas(100).
 */
 
  /*starter Pack*/
- inven(16,shove,1,0,0,1).
- inven(17,fishing,1,0,0,1).
- inven(4,corn,10,100,0,0).
+inven(16,shove,1,0,0,1).
+inven(17,fishing,1,0,0,1).
+inven(4,corn,10,100,0,0).
 
 /*LIST ITEM*/
 /*fishing*/

@@ -1,4 +1,3 @@
-:- include('itemAndReconInven.pl').
 :- dynamic(playerMoney/1).
 
 /*sementara, nanti diganti sama yang dari mekanisme player */
