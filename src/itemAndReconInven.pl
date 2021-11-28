@@ -12,6 +12,15 @@ kapasitas(100).
     6. level
  */
 
+ /* READ THIS
+     - buat dynamic item itu cuman buat list aja kalo butuh
+    untuk inventory yang bner bner invetory, itu di dynamic inven
+    - parameter kalau mau nambah item ke tas itu (Id,Jumlah itemnya)
+    - parameter hapus/throw item sama kayak nambah item
+    - yang ada comment "cek" di atas rules nya, itu cmn buat ngecek bner apa engga
+    rules yang udah di buat
+*/
+
  /*starter Pack*/
  inven(16,shove,1,0,0,1).
  inven(17,fishing,1,0,0,1).
