@@ -9,7 +9,7 @@ market:-
     write('Mau ngapain ? '),nl,
     write('1. buy'),nl,
     write('2. sell'),nl,
-    write('Pilih : '),read(Pilihan),nl,
+    write('Pilih (buy/sell): '),read(Pilihan),nl,
     (
         Pilihan == buy ->
             write('Item yang tersedia : '),nl,
