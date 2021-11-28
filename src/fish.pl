@@ -50,6 +50,7 @@ fish5 :-
 % Main fish (belum add waktu)
 fish :-
 	isCanFish, !,
+	NotLateNight, !,
 	level(X),
 	(	X == 1 -> fish1;
 		X == 2 -> fish2;
