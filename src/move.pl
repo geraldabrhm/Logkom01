@@ -6,12 +6,6 @@ player(7,6).
 %toGetWalk buat ngelarang pemain ke tile tertentu
 toGetWalk(X,Y):- \+tile_water(X,Y),\+isWallTile(X,Y),\+place('Q',X,Y), \+place('R',X,Y), \+place('H',X,Y), \+place('M',X,Y).
 
-% MOVE
-%w :- player(X,Y), W is Y-1, W > 0, !, retract(player(X,Y)), assertz(player(X,W)); write('Ada Tembok Bos!'),nl,map.
-%s :- player(X,Y), map_size(_,B), S is Y+1, S =< B, !, retract(player(X,Y)), assertz(player(X,S)); write('Ada Tembok Bos!'),nl,map.
-%a :- player(X,Y), A is X-1, A > 0, !, retract(player(X,Y)), assertz(player(A,Y)); write('Ada Tembok Bos!'),nl,map.
-%d :- player(X,Y), map_size(A,_), D is X+1, D =< A, !, retract(player(X,Y)), assertz(player(D,Y)); write('Ada Tembok Bos!'),nl,map.
-
 %handling masuk air
 
 w :- player(X,Y),W is Y-1,
