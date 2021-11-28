@@ -7,11 +7,11 @@ playerMoney(5000).
 
 market:-
     write('Mau ngapain ? '),nl,
-    write('1. Beli'),nl,
-    write('2. Jual'),nl,
+    write('1. buy'),nl,
+    write('2. sell'),nl,
     write('Pilih : '),read(Pilihan),nl,
     (
-        Pilihan == 1 ->
+        Pilihan == buy ->
             write('Item yang tersedia : '),nl,
             write('1. Corn seed (75 gold)'),nl,
             write('2. Potato seed (150 gold)'),nl,
@@ -23,7 +23,7 @@ market:-
             write('8. Level 2 Fishing Rod(750 gold'),nl,
             write('9. Level 3 Shovel(2000 gold)'),nl,
             write('10. Level 3 Fishing Rod (2000 gold)'),nl,
-            write('Pilihan : '),read(PilihItem),nl,
+            write('Pilih berdasarkan nomor : '),read(PilihItem),nl,
             playerMoney(Uang),
             (
                 PilihItem == 1 ->
@@ -140,7 +140,7 @@ market:-
                     );
                 write('List barang tidak tersedia !'),nl
             );
-        Pilihan == 2->
+        Pilihan == sell ->
             write('Item yang dapat anda jual dari Inventory : '),nl,
             rawDisplayMarket,
             write('Pilih Nama item : '),nl,read(PilihJual),nl,

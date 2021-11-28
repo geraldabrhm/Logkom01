@@ -60,7 +60,7 @@ displayPanjang:-
     write('Banyak isi tas sekarang adalah '),write(A),nl,!.
 
 /* Display Inventory */
-rawDisplay:-
+inventory:-
     banyakItem(A),
     write('Isi tas kamu ada ('),write(A),write(' / 100)'),nl,
     findall(Id,inven(Id,_,_,_,_,_),ListOfID),
@@ -108,7 +108,7 @@ upgradeTool(Id,Lvl):-
     inven(Id,Nama,Amount,HargaJ,HargaB,_),
     A is Lvl,
     retract(inven(Id,_,_,_,_,_)),
-    asserta(item(Id,Nama,Amount,HargaJ,HargaB,A)).
+    asserta(inven(Id,Nama,Amount,HargaJ,HargaB,A)).
 
 throwItem(Id,Banyak):-
     inven(Id,Nama,Amount,HargaJ,HargaB,Level),
