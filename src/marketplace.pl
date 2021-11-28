@@ -137,18 +137,22 @@ market:-
                             asserta(playerMoney(NewUang)),
                             write('anda berhasil upgrade fishing rod ke level 3 dengan harga 2000 gold');
                         write('Uang mu tidak mencukupi untuk membeli corn seed'),nl                        
-                    )
+                    );
+                write('List barang tidak tersedia !'),nl
             );
         Pilihan == 2->
-            playerMoney(Uang),
             write('Item yang dapat anda jual dari Inventory : '),nl,
-            item(4,_,A,_,_,_),write('- '),write(A),write(' Corn (100 gold)'),nl,
-            item(5,_,B,_,_,_),write('- '),write(B),write(' Potato (300 gold)'),nl,
-            item(6,_,C,_,_,_),write('- '),write(C),write(' Tomato (200) gold)'),nl,
-            item(13,_,D,_,_,_),write('- '),write(D),write(' Egg (100 gold)'),nl,
-            item(14,_,E,_,_,_),write('- '),write(E),write(' Milk (400 gold)'),nl,
-            item(15,_,F,_,_,_),write('- '),write(F),write(' Wool (750 gold)'),nl,
-            item(1,_,G,_,_,_),write('- '),write(G),write(' Catfish (75 gold)'),nl,
-            item(2,_,H,_,_,_),write('- '),write(H),write(' Salmon (150 gold)'),nl,
-            item(3,_,I,_,_,_),write('- '),write(I),write(' Tuna (250 gold)'),nl
+            rawDisplayMarket,
+            write('Pilih Nama item : '),nl,read(PilihJual),nl,
+            playerMoney(Uang),
+            write('Mau jual berapa bang ?'),nl,read(JumlahJual),nl,
+            inven(Id,PilihJual,Amount,SellPrice,_,_),
+            A is Amount,
+            ( A >= JumlahJual ->  
+                throwItem(Id,JumlahJual),
+                write('Anda telah berhasil menjual '),write(JumlahJual),write(' '),write(PilihJual),nl,
+                NewUang is Uang + SellPrice,
+                retract(playerMoney(_)),asserta(playerMoney(NewUang));
+            write('Jumlah terlalu banyak !'),nl
+            )
     ).
