@@ -67,7 +67,7 @@ market:-
                         write('Mau beli berapa ?'),read(JumlahItem),nl,
                         Tot is 750*JumlahItem,
                         Uang >= Tot ->
-                            addItem(10,JumlahItem),
+                            addChicken(JumlahItem),
                             NewUang is Uang-Tot,
                             retract(playerMoney(_)),
                             asserta(playerMoney(NewUang)),
@@ -79,7 +79,7 @@ market:-
                         write('Mau beli berapa ?'),read(JumlahItem),nl,
                         Tot is 1500*JumlahItem,
                         Uang >= Tot ->
-                            addItem(11,JumlahItem),
+                            addCow(JumlahItem),
                             NewUang is Uang-Tot,
                             retract(playerMoney(_)),
                             asserta(playerMoney(NewUang)),
@@ -91,7 +91,7 @@ market:-
                         write('Mau beli berapa ?'),read(JumlahItem),nl,
                         Tot is 2000*JumlahItem,
                         Uang >= Tot ->
-                            addItem(12,JumlahItem),
+                            addSheep(JumlahItem),
                             NewUang is Uang-Tot,
                             retract(playerMoney(_)),
                             asserta(playerMoney(NewUang)),

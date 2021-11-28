@@ -19,6 +19,7 @@ kapasitas(100).
     - parameter hapus/throw item sama kayak nambah item
     - yang ada comment "cek" di atas rules nya, itu cmn buat ngecek bner apa engga
     rules yang udah di buat
+    - Selain hewan, semua pake fakta inven, hewan pake fakta item aja
 */
 
  /*starter Pack*/
