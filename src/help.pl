@@ -1,5 +1,5 @@
 help  :-
-    game_start(true),
+    game_started(true),
 
     write('map        => Menampilkan peta'), nl,
     write('inventory  => Menampilkan inventory'), nl,

@@ -18,7 +18,7 @@ start :-
     %['house.pl'],
     %['farm.pl'],
     %['ranch.pl'],
-    %['fish.pl'],
+    ['fish.pl'],
 
     retract(game_started(false)), !,
     asserta(game_started(true)),
