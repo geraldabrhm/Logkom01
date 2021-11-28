@@ -24,7 +24,8 @@ start :-
     asserta(game_started(true)),
 
     printHouse,
-    write('Welcome to Harvest Star. Choose your job'),nl,
+    printWelcome,
+    write('This is Harvest Star. Choose your job'),nl,
     write('1. Fisherman'),nl,
     write('2. Farmer'),nl,
     write('3. Rancher'),nl,
