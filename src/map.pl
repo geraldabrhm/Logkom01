@@ -44,14 +44,14 @@ isWallTile(X,Y):- X=:=0;Y=:=0;X=:=15;Y=:=18.
 draw_point(X, Y) :- map_size(W, H),
 					X =:= W + 1,
 					Y =< H + 1,
-					write('#'), nl,
+					write('# '), nl,
 					NewY is Y+1,
 					draw_point(0, NewY).
 % LEFT BORDER	
 draw_point(X, Y) :- map_size(_, H),
 					X =:= 0,
 					Y =< H+1,
-					write('#'),
+					write('# '),
 					NewX is X+1,
 					draw_point(NewX, Y).
 % TOP BORDER			
@@ -59,7 +59,7 @@ draw_point(X, Y) :- map_size(W, _),
 					X < W + 1,
 					X > 0,
 					Y =:= 0,
-					write('#'),
+					write('# '),
 					NewX is X+1,
 					draw_point(NewX, Y).
 % BOTTOM BORDER								
@@ -67,7 +67,7 @@ draw_point(X, Y) :- map_size(W, H),
 					X < W + 1,
 					X > 0,
 					Y =:= H + 1,
-					write('#'),
+					write('# '),
 					NewX is X+1,
 					draw_point(NewX, Y).					
 % MAP INSIDE
@@ -77,7 +77,7 @@ draw_point(X, Y) :- map_size(W, H),
 					Y < H + 1,
 					Y > 0,
 					player(X,Y), !,
-					write('P'),
+					write('P '),
 					NewX is X+1,
 					draw_point(NewX, Y).					
 draw_point(X, Y) :- map_size(W, H),
@@ -86,7 +86,7 @@ draw_point(X, Y) :- map_size(W, H),
 					Y < H + 1,
 					Y > 0,
 					place(Obj, X, Y), !,
-					write(Obj),
+					write(Obj),write(' '),
 					NewX is X+1,
 					draw_point(NewX, Y).
 draw_point(X, Y) :- map_size(W, H),
@@ -95,7 +95,7 @@ draw_point(X, Y) :- map_size(W, H),
 					Y < H + 1,
 					Y > 0,
 					tile_water(X,Y), !,
-					write('o'),
+					write('o '),
 					NewX is X+1,
 					draw_point(NewX, Y).
 % EMPTY TILE					
@@ -107,7 +107,7 @@ draw_point(X, Y) :- map_size(W, H),
 					(\+ player(X, Y)),
 					(\+ place(_, X, Y)),
 					(\+ tile_water(X, Y)),
-					write('-'),
+					write('- '),
 					NewX is X+1,
 					draw_point(NewX, Y).
 
