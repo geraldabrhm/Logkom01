@@ -1,9 +1,5 @@
 /* Farming */
 
-:- dynamic(item/6).
-:- dynamic(inven//6).
-:- dynamic(tool/7).
-
 /* Farming actions */
 % list ID item seed
 seed_list([e10,e11,e12,e13,e14,e15,e16,e17,e18]).
@@ -46,13 +42,13 @@ plant :- runProgram(_),
     \+isSoilTile(X,Y),
     write('-------------- \33\[38;5;76mTanah ini belum di gali! kamu harus menggalinya dulu dengan command dig\33\[0m -------------- '),nl,!.
 
-plant :- runProgram(_),
+plant :- 
     posisi(X,Y),
     isSoilTile(X,Y),
     is_not_in_inventory,
     write('-------------- \33\[38;5;202mKamu tidak punya bibit di inventory !\33\[0m -------------- '),nl,!.
 
-plant :- runProgram(_),
+plant :- ,
     posisi(X,Y),
     isSoilTile(X,Y),
     inventory(CurrentInventory),
