@@ -35,4 +35,4 @@ plant:-
             throwItem(9,NewC),
             retract(place('=',X,Y)),
             asserta(place('t',X,Y)),
-    )
+    ).
