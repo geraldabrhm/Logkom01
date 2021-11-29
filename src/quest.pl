@@ -63,6 +63,14 @@ quest:-
 
 quest:- write('Pergi ke tempat Quest dulu bos!'), nl.
 
+onGoing:-
+    haveQuest(yes), !,
+    ranchingQ,
+    fishingQ,
+    harvestingQ.
+
+onGoing :- write('Belum ada quest bos!'),nl.
+
 updateQuestRanch(jumlah):-
     listQuest(ranching,ValueOfRanch),
     NewValue is ValueOfRanch - jumlah,
