@@ -14,75 +14,39 @@ addTuna :-
 
 % Kondisi Fishing tiap level
 fish1 :-
-	specialty(fisherman), !,
 	random(1,101,N),
-	(	N > 0, N =< 50 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 20 xp bos!'), nl, addExpFishing(20);
-		N > 50, N =< 100 -> write('Selamat bos! dapet lele'), nl, write('Dapet 40 xp bos!'), nl, addCatfish, addExpFishing(40), updateQuestFish(1)
-	).
-fish1 :-
-	random(1,101,N),
-	(	N > 0, N =< 50 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl, addExpFishing(10);
-		N > 50, N =< 100 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish, addExpFishing(20), updateQuestFish(1)
+	(	N > 0, N =< 50 -> write('Gadapet apa-apa bos!'), nl, addExpFishing(10);
+		N > 50, N =< 100 -> write('Selamat bos! dapet lele'), nl, addCatfish, addExpFishing(20), updateQuestFish(1)
 	).
 
 fish2 :-
-	specialty(fisherman), !,
 	random(1,101,N),
-	(	N > 0, N =< 45 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 20 xp bos!'), nl, addExpFishing(20);
-		N > 45, N =< 85 -> write('Selamat bos! dapet lele'), nl, write('Dapet 40 xp bos!'), nl, addCatfish, addExpFishing(40), updateQuestFish(1);
-		N > 85, N =< 100 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 70 xp bos!'), nl, addSalmon, addExpFishing(70), updateQuestFish(1)
-	).
-fish2 :-
-	random(1,101,N),
-	(	N > 0, N =< 45 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl, addExpFishing(10);
-		N > 45, N =< 85 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish, addExpFishing(20), updateQuestFish(1);
-		N > 85, N =< 100 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 35 xp bos!'), nl, addSalmon, addExpFishing(35), updateQuestFish(1)
+	(	N > 0, N =< 45 -> write('Gadapet apa-apa bos!'), nl, addExpFishing(10);
+		N > 45, N =< 85 -> write('Selamat bos! dapet lele'), nl, addCatfish, addExpFishing(20), updateQuestFish(1);
+		N > 85, N =< 100 -> write('Selamat bos! dapet salmon'), nl, addSalmon, addExpFishing(35), updateQuestFish(1)
 	).
 
 fish3 :-
-	specialty(fisherman), !,
 	random(1,101,N),
-	(	N > 0, N =< 40 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 20 xp bos!'), nl, addExpFishing(20);
-		N > 40, N =< 80 -> write('Selamat bos! dapet lele'), nl, write('Dapet 40 xp bos!'), nl, addCatfish, addExpFishing(40), updateQuestFish(1);
-		N > 80, N =< 100 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 70 xp bos!'), nl, addSalmon, addExpFishing(70), updateQuestFish(1)
-	).
-fish3 :-
-	random(1,101,N),
-	(	N > 0, N =< 40 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl, addExpFishing(10);
-		N > 40, N =< 80 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish, addExpFishing(20), updateQuestFish(1);
-		N > 80, N =< 100 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 35 xp bos!'), nl, addSalmon, addExpFishing(35), updateQuestFish(1)
+	(	N > 0, N =< 40 -> write('Gadapet apa-apa bos!'), nl, addExpFishing(10);
+		N > 40, N =< 80 -> write('Selamat bos! dapet lele'), nl, addCatfish, addExpFishing(20), updateQuestFish(1);
+		N > 80, N =< 100 -> write('Selamat bos! dapet salmon'), nl, addSalmon, addExpFishing(35), updateQuestFish(1)
 	).
 
 fish4 :-
-	specialty(fisherman), !,
 	random(1,101,N),
-	(	N > 0, N =< 30 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 20 xp bos!'), nl, addExpFishing(20);
-		N > 30, N =< 70 -> write('Selamat bos! dapet lele'), nl, write('Dapet 40 xp bos!'), nl, addCatfish, addExpFishing(40), updateQuestFish(1);
-		N > 70, N =< 95 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 70 xp bos!'), nl, addSalmon, addExpFishing(70), updateQuestFish(1);
-		N > 95, N =< 100 -> write('Selamat bos! dapet tuna'), nl, write('Dapet 100 xp bos!'), nl, addTuna, addExpFishing(100), updateQuestFish(1)
-	).
-fish4 :-
-	random(1,101,N),
-	(	N > 0, N =< 30 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl, addExpFishing(10);
-		N > 30, N =< 70 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish, addExpFishing(20), updateQuestFish(1);
-		N > 70, N =< 95 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 35 xp bos!'), nl, addSalmon, addExpFishing(35), updateQuestFish(1);
-		N > 95, N =< 100 -> write('Selamat bos! dapet tuna'), nl, write('Dapet 50 xp bos!'), nl, addTuna, addExpFishing(50), updateQuestFish(1)
+	(	N > 0, N =< 30 -> write('Gadapet apa-apa bos!'), nl, addExpFishing(10);
+		N > 30, N =< 70 -> write('Selamat bos! dapet lele'), nl, addCatfish, addExpFishing(20), updateQuestFish(1);
+		N > 70, N =< 95 -> write('Selamat bos! dapet salmon'), nl, addSalmon, addExpFishing(35), updateQuestFish(1);
+		N > 95, N =< 100 -> write('Selamat bos! dapet tuna'), nl, addTuna, addExpFishing(50), updateQuestFish(1)
 	).
 
 fish5 :-
-	specialty(fisherman), !,
 	random(1,101,N),
-	(	N > 0, N =< 25 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 20 xp bos!'), nl, addExpFishing(20);
-		N > 25, N =< 65 -> write('Selamat bos! dapet lele'), nl, write('Dapet 40 xp bos!'), nl, addCatfish, addExpFishing(40), updateQuestFish(1);
-		N > 65, N =< 90 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 70 xp bos!'), nl, addSalmon, addExpFishing(70), updateQuestFish(1);
-		N > 90, N =< 100 -> write('Selamat bos! dapet tuna'), nl, write('Dapet 100 xp bos!'), nl, addTuna, addExpFishing(100), updateQuestFish(1)
-	).
-fish5 :-
-	random(1,101,N),
-	(	N > 0, N =< 25 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl, addExpFishing(10);
-		N > 25, N =< 65 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish, addExpFishing(20), updateQuestFish(1);
-		N > 65, N =< 90 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 35 xp bos!'), nl, addSalmon, addExpFishing(35), updateQuestFish(1);
-		N > 90, N =< 100 -> write('Selamat bos! dapet tuna'), nl, write('Dapet 50 xp bos!'), nl, addTuna, addExpFishing(50), updateQuestFish(1)
+	(	N > 0, N =< 25 -> write('Gadapet apa-apa bos!'), nl, addExpFishing(10);
+		N > 25, N =< 65 -> write('Selamat bos! dapet lele'), nl, addCatfish, addExpFishing(20), updateQuestFish(1);
+		N > 65, N =< 90 -> write('Selamat bos! dapet salmon'), nl, addSalmon, addExpFishing(35), updateQuestFish(1);
+		N > 90, N =< 100 -> write('Selamat bos! dapet tuna'), nl, addTuna, addExpFishing(50), updateQuestFish(1)
 	).
 
 fish :- lateNight, !, write('Udah malem bos, waktunya tidur!'), nl.

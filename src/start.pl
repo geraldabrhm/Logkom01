@@ -50,3 +50,12 @@ quit :-
     Quit == y -> halt;
     Quit == n -> fail
 	).
+
+quitEnd:-
+    write('Terimakasih sudah bermain Harvest Star!'), nl,
+    write('Do you want to quit (y/n)?'), nl,
+    read(Quit),
+    (
+    Quit == y -> halt;
+    Quit == n -> fail
+	).

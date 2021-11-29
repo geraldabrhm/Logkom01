@@ -1,7 +1,7 @@
 :- dynamic(playerMoney/1).
 
 /*sementara, nanti diganti sama yang dari mekanisme player */
-playerMoney(5000).
+playerMoney(1000).
 
 inMarket :- player(X,Y), place('M',X,Y).
 
@@ -155,7 +155,12 @@ market:-
                 NewUang is Uang + SellPrice,
                 retract(playerMoney(_)),asserta(playerMoney(NewUang));
             write('Jumlah terlalu banyak !'),nl
-            )
+            ),
+            ( NewUang >= 20000 -> 
+                write('Selamat anda berhasil mengumpulkan 20000 gold'), nl,
+                write('Semua hutang anda dapat dilunaskan berkat kerja keras Anda selama ini!'), nl,
+                quitEnd.
+            ).
     ).
 
 market :- write('Pergi ke market dulu bos!'),nl.

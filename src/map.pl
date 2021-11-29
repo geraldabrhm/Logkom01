@@ -7,6 +7,7 @@
 
 /* Initial Map */
 /* M: Marketplace, R: Ranch, H: House, Q: Tempat pengambilan quest, o: Tile air, =: Digged tile */
+/* j: benih jagung, k: benih kentang, t:benih tomat, J:panen jagung, K:panen kentang T:panen tomat */
 
 place('H',7,6).
 place('Q',7,3).
@@ -25,7 +26,10 @@ tile_water(6,10).
 tile_water(7,10).
 map_size(14,17).
 
-isWallTile(X,Y):- X=:=0;Y=:=0;X=:=15;Y=:=18. 
+isWallTile(X,Y):- X=:=0;Y=:=0;X=:=15;Y=:=18.
+
+/* tile check buat digging */
+isRawTile(X,Y):-\+tile_water(X,Y),\+place(_,X,Y),\+isWallTile(X,Y).
 
 % MAP
 % RIGHT BORDER
@@ -84,6 +88,15 @@ draw_point(X, Y) :- map_size(W, H),
 					Y > 0,
 					tile_water(X,Y), !,
 					write('o '),
+					NewX is X+1,
+					draw_point(NewX, Y).
+draw_point(X, Y) :- map_size(W, H),
+					X < W + 1,
+					X > 0,
+					Y < H + 1,
+					Y > 0,
+					harvestTile(Obj, X, Y), !,
+					write(Obj),write(' '),
 					NewX is X+1,
 					draw_point(NewX, Y).
 % EMPTY TILE					

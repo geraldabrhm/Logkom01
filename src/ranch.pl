@@ -1,6 +1,10 @@
 :- dynamic(timeToExploit/1).
 :- dynamic(collOfRanchItem/3).
-:- dynamic(timeRanch/1).
+:- dynamic(beenExploit/1).
+% :- dynamic(lvlRanching/1).
+% :- dynamic(expRanching/1).
+% :- dynamic(timeRanch/1).
+% :- dynamic(hoursTaken/1).
 
 
 % exp(A, B): exp yang didapat dari A adalah B ketika di-collect
@@ -11,7 +15,9 @@ exp(wool, 35). % sheep
 % Initial
 timeToExploit(5). % waktu yg dibutuhkan untuk chicken, cow, dan sheep bisa di exploit
 collOfRanchItem(0, 0, 0). % koleksi yang bisa dieksploitasi (belum di eksploitasi dan bisa dimasukan ke inventory), arg menunjukan 0 egg, 0 milk, 0 wool
-timeRanch(0). % mekanisme waktu khusus ranch
+beenExploit(0).
+% timeRanch(0).
+% hoursTaken(0).
 
 updateLevel :-
     (expRanching(A), Exp is A),
@@ -28,19 +34,31 @@ updateTime :-
     (lvlRanching(4)) -> (retract(timeToExploit(_)), asserta(timeToExploit(2)));
     (lvlRanching(5)) -> (retract(timeToExploit(_)), asserta(timeToExploit(1))).
 
-% [Nunggu mekanisme hours]
-updateTimeRanch :-
-    % if <Hours> tambah 1 <timeRanch> tambah 1
-    (timeToExploit(WEks),
-    timeRanch(WRan),
-    Incr is WRan + 1),
-    (((WRan =:= WEks) -> (increaseColl, retract(timeRanch(_)), asserta(timeRanch(0))));
-    ((WRan =\= WEks) -> (retract(timeRanch(_)), asserta(timeRanch(Incr))))).
+updateColl :-
+    timeToExploit(WEks),
+    hours(Jamnya),
+    days(Harinya),
+    beenExploit(Pliss),
+    HariAsli is Harinya - 1,
+    Nilai is ((HariAsli * 24) + Jamnya - 6),
+    NowVal is Nilai // WEks, % csplfo ej tjoj
+    NowValUpdate is NowVal - Pliss,
+    increaseColl(NowValUpdate).
+
+    % hoursTaken(Ada),
+    % timeRanch(Bingung),
+    % Totalnya is ((24 * HariAsli) + Jamnya - 6),
+    % Totaluntukdipake is Totalnya - Ada,
+    % Val1 is Totaluntukdipake // WEks,
+    % Val2 is Totaluntukdipake mod WEks),
+    % retract(timeRanch(_)), asserta(timeRanch(Val2)),
+    % (((Val1 =:= WEks) -> (increaseColl(Val1)));
+    % ((WRan =\= WEks) -> (retract(timeRanch(_)), asserta(timeRanch(Incr))))).
     
-% menambah elemen-elemen collOfRanchItem sebanyak 1
-increaseColl :-
+% menambah elemen-elemen collOfRanchItem sebanyak X
+increaseColl(X) :-
     collOfRanchItem(Awal1, Awal2, Awal3),
-    Inc1 is Awal1 + 1, Inc2 is Awal2 + 1, Inc3 is Awal3 + 1,
+    Inc1 is Awal1 + X, Inc2 is Awal2 + X, Inc3 is Awal3 + X,
     retract(collOfRanchItem(_,_,_)), asserta(collOfRanchItem(Inc1, Inc2, Inc3)).
     
 
@@ -55,42 +73,58 @@ addSheep(N) :-
 % addSomething: Menambahkan Something sejumlah N ke inventory dan mengurangi collOfRanchItem
 addEgg :-
     (collOfRanchItem(Amount1, Amount2, Amount3),
-    N is Amount1),
+    N is Amount1, 
+    item(10,_,X,_,_,_)),
     (((N =\= 0) -> (retract(collOfRanchItem(_,_,_)), asserta(collOfRanchItem(0, Amount2, Amount3)),
 	% retract(item(13,egg,X,100,0,0)), NewX is X+N, asserta(item(13,egg,NewX,100,0,0)), % ekivalen sama addItem(13, N)
     addItem(13, N),
+    % timeToExploit(II),
     exp(egg, Val),
     expRanching(Before),
-    ExpAfter is Before + (Val * N),
+    To is Val * N * X,
+    ExpAfter is Before + To,
     retract(expRanching(_)), asserta(expRanching(ExpAfter)),
-    write('You just exploit chicken and get '), write(N), write(' egg and put it in your inventory')));
-    ((N =:= 0) -> write('There is no egg you can get now'))).
-    % [Nanti nambah exp player juga di sini]
+    write('Baru aja ngambil telur ayam nih bos, dapet'), write(N), write(' telur, di inventory udah nambah'),
+    beenExploit(Brp), Suatu is Brp + 1, retract(beenExploit(_)), asserta(beenExploit(Suatu)))); 
+    % hoursTaken(Sblm), P is II * N + Sblm, retract(hoursTaken(_)), asserta(hoursTaken(P))
+    ((N =:= 0) -> write('Telurnya lagi kosong bos, no pain no gain, tunggu waktunya'), nl)),
+    addExpGeneral(To).
 addMilk :-
     (collOfRanchItem(Amount1, Amount2, Amount3),
-    N is Amount2),
+    N is Amount2, 
+    item(11,_,X,_,_,_)),
     (((N =\= 0) -> (retract(collOfRanchItem(_,_,_)), asserta(collOfRanchItem(Amount1, 0, Amount3)),
 	% retract(item(14,milk,X,400,0,0)), NewX is X+N, asserta(item(14,milk,NewX,400,0,0)), % ekivalen sama addItem(14, N)
     addItem(14, N),
+    % timeToExploit(II),
     exp(milk, Val),
     expRanching(Before),
-    ExpAfter is Before + (Val * N),
+    To is Val * N * X,
+    ExpAfter is Before + To,
     retract(expRanching(_)), asserta(expRanching(ExpAfter)),
-    write('You just exploit cow and get '), write(N), write(' milk and put it in your inventory')));
-    ((N =:= 0) -> write('There is no milk you can get now'))).
-    % [Nanti nambah exp player juga di sini]
+    write('Mantep, dapet '), write(N), write(' susu nih bos, di inventory udah ditambah'), nl,
+    beenExploit(Brp), Suatu is Brp + 1, retract(beenExploit(_)), asserta(beenExploit(Suatu)))); 
+    % hoursTaken(Sblm), P is II * N + Sblm, retract(hoursTaken(_)), asserta(hoursTaken(P))
+    ((N =:= 0) -> write('Milk yang dihasilin sapinya lagi abis nih bos, no pain no gain, tunggu waktunya'), nl)),
+    addExpGeneral(To).
 addWool :-
     (collOfRanchItem(Amount1, Amount2, Amount3),
-    N is Amount3),
+    N is Amount3,
+    item(12,_,X,_,_,_)),
     (((N =\= 0) -> (retract(collOfRanchItem(_,_,_)), asserta(collOfRanchItem(Amount1, Amount2, 0)),
-	% retract(item(13,egg,X,100,0,0)), NewX is X+N, asserta(item(13,egg,NewX,100,0,0)), % ekivalen sama addItem(15, N)
+	% retract(item(15,wool,X,750,0,0)), NewX is X+N, asserta(item(15,wool,NewX,750,0,0)), % ekivalen sama addItem(15, N)
     addItem(15, N),
+    % timeToExploit(II),
     exp(wool, Val),
     expRanching(Before),
-    ExpAfter is Before + (Val * N),
+    To is Val * N * X,
+    ExpAfter is Before + To,
     retract(expRanching(_)), asserta(expRanching(ExpAfter)),
-    write('You just exploit sheep and get '), write(N), write(' wool and put it in your inventory')));
-    ((N =:= 0) -> write('There is no wool you can get now'))).
+    write('Dapet juga wolnya, dah tuh jual atau dipake jait, dapet '), write(N), write(' wol, udah ditaro di inventory ya'), nl,
+    beenExploit(Brp), Suatu is Brp + 1, retract(beenExploit(_)), asserta(beenExploit(Suatu)))); 
+    % hoursTaken(Sblm), P is II * N + Sblm, retract(hoursTaken(_)), asserta(hoursTaken(P))
+    ((N =:= 0) -> (write('Wolnya udah abis nih bos, lain kali ambilnya'), nl))),
+    addExpGeneral(To).
     % [Nanti nambah exp player juga di sini]
 
 inRanch :- player(X,Y), place('R',X,Y).
@@ -99,11 +133,12 @@ ranch :-
     inRanch, !,
     updateLevel,
     updateTime,
-    updateTimeRanch,
+    updateColl,
     write('What animal you want to exploit (You can type chicken., cow., or sheep.): '), nl,
     read(PickedAnimal),
     (((PickedAnimal = 'chicken') -> (addEgg));
     ((PickedAnimal = 'cow') -> (addMilk));
-    ((PickedAnimal = 'sheep') -> (addWool))).
+    ((PickedAnimal = 'sheep') -> (addWool));
+    ((\+(PickedAnimal = 'chicken'), \+(PickedAnimal = 'cow'), \+(PickedAnimal = 'sheep')) -> (write('Gak ada hewan yang lu sebutin bos, cuma ada chicken, cow, sama sheep aja')))).
 
 ranch :- write('Pergi ke peternakan dulu bos!'), nl.

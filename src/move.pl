@@ -1,4 +1,4 @@
-/* belum handle moving object (dig tile, player) */
+/* belum handle moving object (dig tile) */
 :- dynamic(player/2).
 
 player(7,6).

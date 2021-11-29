@@ -21,33 +21,78 @@ expFarming(0).
 
 % add exp
 addExpRanching(Y) :-
+    specialty(rancher), !,
+    lvlRanching(A),
+    expRanching(X1),
+    Z is Y * 2,
+    X is X1 + Z,
+    write('Dapet '), write(Z) write(' xp bos!'), nl,
+    addExpGeneral(Z),
+    ( A =< 4 -> retract(expRanching(X1)),asserta(expRanching(X))),
+    (   X >= 300, A =:= 1 -> retract(lvlRanching(1)), asserta(lvlRanching(2)), resetExpRanching;
+        X >= 500, A =:= 2 -> retract(lvlRanching(2)), asserta(lvlRanching(3)), resetExpRanching;
+        X >= 1000, A =:= 3 -> retract(lvlRanching(3)), asserta(lvlRanching(4)), resetExpRanching;
+        X >= 1500, A =:= 4 -> retract(lvlRanching(4)), asserta(lvlRanching(5)), resetExpRanching).
+
+addExpRanching(Y) :-
     lvlRanching(A),
     expRanching(X1),
     X is X1 + Y,
+    write('Dapet '), write(Y) write(' xp bos!'), nl,
     addExpGeneral(Y),
-    ( A < 4 -> retract(expRanching(X1)),asserta(expRanching(X))),
+    ( A =< 4 -> retract(expRanching(X1)),asserta(expRanching(X))),
     (   X >= 300, A =:= 1 -> retract(lvlRanching(1)), asserta(lvlRanching(2)), resetExpRanching;
         X >= 500, A =:= 2 -> retract(lvlRanching(2)), asserta(lvlRanching(3)), resetExpRanching;
         X >= 1000, A =:= 3 -> retract(lvlRanching(3)), asserta(lvlRanching(4)), resetExpRanching;
         X >= 1500, A =:= 4 -> retract(lvlRanching(4)), asserta(lvlRanching(5)), resetExpRanching).
 
 addExpFishing(Y) :-
+    specialty(fisherman), !,
+    lvlFishing(A),
+    expFishing(X1),
+    Z is Y * 2,
+    X is X1 + Z,
+    write('Dapet '), write(Z) write(' xp bos!'), nl,
+    addExpGeneral(Z),
+    ( A =< 4 -> retract(expFishing(X1)), asserta(expFishing(X))),
+    (   X >= 300, A =:= 1 -> retract(lvlFishing(1)), asserta(lvlFishing(2)), resetExpFishing;
+        X >= 500, A =:= 2 -> retract(lvlFishing(2)), asserta(lvlFishing(3)), resetExpFishing;
+        X >= 1000, A =:= 3 -> retract(lvlFishing(3)), asserta(lvlFishing(4)), resetExpFishing;
+        X >= 1500, A =:= 4 -> retract(lvlFishing(4)), asserta(lvlFishing(5)), resetExpFishing).
+
+addExpFishing(Y) :-
     lvlFishing(A),
     expFishing(X1),
     X is X1 + Y,
+    write('Dapet '), write(Y) write(' xp bos!'), nl,
     addExpGeneral(Y),
-    ( A < 4 -> retract(expFishing(X1)), asserta(expFishing(X))),
+    ( A =< 4 -> retract(expFishing(X1)), asserta(expFishing(X))),
     (   X >= 300, A =:= 1 -> retract(lvlFishing(1)), asserta(lvlFishing(2)), resetExpFishing;
         X >= 500, A =:= 2 -> retract(lvlFishing(2)), asserta(lvlFishing(3)), resetExpFishing;
         X >= 1000, A =:= 3 -> retract(lvlFishing(3)), asserta(lvlFishing(4)), resetExpFishing;
         X >= 1500, A =:= 4 -> retract(lvlFishing(4)), asserta(lvlFishing(5)), resetExpFishing).
 
 addExpFarming(Y) :-
+    specialty(farmer), !,
+    lvlFarming(A),
+    expFarming(X1),
+    Z is Y * 2,
+    X is X1 + Z,
+    write('Dapet '), write(Z) write(' xp bos!'), nl,
+    addExpGeneral(Z),
+    ( A =< 4 -> retract(expFishing(X1)), asserta(expFishing(X))),
+    (   X >= 300, A =:= 1 -> retract(lvlFarming(1)), asserta(lvlFarming(2)), resetExpFarming;
+        X >= 500, A =:= 2 -> retract(lvlFarming(2)), asserta(lvlFarming(3)), resetExpFarming;
+        X >= 1000, A =:= 3 -> retract(lvlFarming(3)), asserta(lvlFarming(4)), resetExpFarming;
+        X >= 1500, A =:= 4 -> retract(lvlFarming(4)), asserta(lvlFarming(5)), resetExpFarming).
+
+addExpFarming(Y) :-
     lvlFarming(A),
     expFarming(X1),
     X is X1 + Y,
+    write('Dapet '), write(Y) write(' xp bos!'), nl,
     addExpGeneral(Y),
-    ( A < 4 -> retract(expFishing(X1)), asserta(expFishing(X))),
+    ( A =< 4 -> retract(expFishing(X1)), asserta(expFishing(X))),
     (   X >= 300, A =:= 1 -> retract(lvlFarming(1)), asserta(lvlFarming(2)), resetExpFarming;
         X >= 500, A =:= 2 -> retract(lvlFarming(2)), asserta(lvlFarming(3)), resetExpFarming;
         X >= 1000, A =:= 3 -> retract(lvlFarming(3)), asserta(lvlFarming(4)), resetExpFarming;
@@ -104,4 +149,3 @@ status :-
     write('Exp Ranching : '), write(F), nl,
     write('Gold : '), write(G), nl,
     write('Exp : '), write(Y), write('/1000'), nl.
-
