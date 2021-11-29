@@ -1,10 +1,6 @@
-
-:- dynamic(lvlRanching/1).
-:- dynamic(expRanching/1).
 :- dynamic(timeToExploit/1).
 :- dynamic(collOfRanchItem/3).
 :- dynamic(timeRanch/1).
-%:- dynamic(hours/1).
 
 
 % exp(A, B): exp yang didapat dari A adalah B ketika di-collect
@@ -13,8 +9,6 @@ exp(milk, 30). % cow
 exp(wool, 35). % sheep
 
 % Initial
-lvlRanching(1). % Lvl ranching
-expRanching(0). % exp ranching
 timeToExploit(5). % waktu yg dibutuhkan untuk chicken, cow, dan sheep bisa di exploit
 collOfRanchItem(0, 0, 0). % koleksi yang bisa dieksploitasi (belum di eksploitasi dan bisa dimasukan ke inventory), arg menunjukan 0 egg, 0 milk, 0 wool
 timeRanch(0). % mekanisme waktu khusus ranch

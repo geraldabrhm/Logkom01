@@ -7,6 +7,10 @@
 game_started(false).
 
 start :-
+    game_started(false), !,
+    retract(game_started(false)),
+    asserta(game_started(true)),
+	
     ['map.pl'],
     ['move.pl'],
     ['itemAndReconInven.pl'],
@@ -20,9 +24,6 @@ start :-
     ['farm.pl'],
     ['ranch.pl'],
     ['fish.pl'],
-
-    retract(game_started(false)), !,
-    asserta(game_started(true)),
 
     printHouse,
     printWelcome,
@@ -38,6 +39,8 @@ start :-
     Job =:= 3 -> assertz(specialty(rancher)), write('Anda memilih rancher!'), nl
     ),
     write('The game already started. Use command \'help.\' for guide'),nl.
+
+start :- write('Game udah dimulai bos!'), nl.
 
 quit :- 
     game_started(true),
