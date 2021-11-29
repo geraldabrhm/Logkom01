@@ -25,8 +25,7 @@ addExpRanching(Y) :-
     expRanching(X1),
     X is X1 + Y,
     addExpGeneral(Y),
-    retract(expRanching(X1)),
-    asserta(expRanching(X)),
+    ( A < 4 -> retract(expRanching(X1)),asserta(expRanching(X))),
     (   X >= 300, A =:= 1 -> retract(lvlRanching(1)), asserta(lvlRanching(2)), resetExpRanching;
         X >= 500, A =:= 2 -> retract(lvlRanching(2)), asserta(lvlRanching(3)), resetExpRanching;
         X >= 1000, A =:= 3 -> retract(lvlRanching(3)), asserta(lvlRanching(4)), resetExpRanching;
@@ -37,8 +36,7 @@ addExpFishing(Y) :-
     expFishing(X1),
     X is X1 + Y,
     addExpGeneral(Y),
-    retract(expFishing(X1)),
-    asserta(expFishing(X)),
+    ( A < 4 -> retract(expFishing(X1)), asserta(expFishing(X))),
     (   X >= 300, A =:= 1 -> retract(lvlFishing(1)), asserta(lvlFishing(2)), resetExpFishing;
         X >= 500, A =:= 2 -> retract(lvlFishing(2)), asserta(lvlFishing(3)), resetExpFishing;
         X >= 1000, A =:= 3 -> retract(lvlFishing(3)), asserta(lvlFishing(4)), resetExpFishing;
@@ -49,8 +47,7 @@ addExpFarming(Y) :-
     expFarming(X1),
     X is X1 + Y,
     addExpGeneral(Y),
-    retract(expFishing(X1)),
-    asserta(expFishing(X)),
+    ( A < 4 -> retract(expFishing(X1)), asserta(expFishing(X))),
     (   X >= 300, A =:= 1 -> retract(lvlFarming(1)), asserta(lvlFarming(2)), resetExpFarming;
         X >= 500, A =:= 2 -> retract(lvlFarming(2)), asserta(lvlFarming(3)), resetExpFarming;
         X >= 1000, A =:= 3 -> retract(lvlFarming(3)), asserta(lvlFarming(4)), resetExpFarming;
@@ -62,7 +59,7 @@ addExpGeneral(Y):-
     C is C1 + Y,
     retract(expGeneral(C1)),
     asserta(expGeneral(C)),
-    (C >= 1000 -> retract(lvlGeneral(_)),B is B1 + 1, asserta(lvlGeneral(B)), resetExpGeneral).
+    (C >= 1000 -> retract(lvlGeneral(_)), B is B1 + 1, asserta(lvlGeneral(B)), resetExpGeneral).
 
 % reset exp
 resetExpRanching :-
@@ -82,7 +79,8 @@ resetExpFarming :-
 
 resetExpGeneral :-
     retract(expGeneral(_)),
-    asserta(expGeneral(0)).    
+    asserta(expGeneral(0)),
+    write('Selamat, naik level bos!'),nl.  
 
 status :- 
     lvlFarming(A),

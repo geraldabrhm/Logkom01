@@ -3,6 +3,7 @@
 %     ● Implementasi rule-rule kendali dasar start, help ,quit, inventory, dll
 
 :- dynamic(isWallTile/2).
+:- dynamic(place/3).
 
 /* Initial Map */
 /* M: Marketplace, R: Ranch, H: House, Q: Tempat pengambilan quest, o: Tile air, =: Digged tile */

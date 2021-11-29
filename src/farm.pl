@@ -1,22 +1,9 @@
 /* Farming */
 
-:- dynamic(item/6).
-:- dynamic(inven//6).
-:- dynamic(tool/7).
-
 /* Farming actions */
 % list ID item seed
 seed_list([e10,e11,e12,e13,e14,e15,e16,e17,e18]).
 planted_list([]).
-
-% mengecek apakah kooordinat X,Y adalah tile soid/seed/plant
-% soilTile(X, Y)
-% seedTile(X, Y, IDSeed,  Time remaining to harvest)
-% plantTile(X, Y, IDSeed)
-
-isSoilTile(X,Y) :- soilTile(X,Y).
-isSeedTile(X,Y) :- seedTile(X,Y,_,_).
-isPlantTile(X,Y) :- plantTile(X,Y,_).
 
 % print semua seed yang ada di inventory
 
@@ -55,13 +42,13 @@ plant :- runProgram(_),
     \+isSoilTile(X,Y),
     write('-------------- \33\[38;5;76mTanah ini belum di gali! kamu harus menggalinya dulu dengan command dig\33\[0m -------------- '),nl,!.
 
-plant :- runProgram(_),
+plant :- 
     posisi(X,Y),
     isSoilTile(X,Y),
     is_not_in_inventory,
     write('-------------- \33\[38;5;202mKamu tidak punya bibit di inventory !\33\[0m -------------- '),nl,!.
 
-plant :- runProgram(_),
+plant :- ,
     posisi(X,Y),
     isSoilTile(X,Y),
     inventory(CurrentInventory),
@@ -110,15 +97,10 @@ plant :- runProgram(_),
 
 
 dig :- runProgram(_),
-    inventory(CurrentInventory),
-    is_member(i1,CurrentInventory,Index),
-    posisi(X,Y),
-    cekArea(X,Y),
-    asserta(soilTile(X,Y)),
-    updateStat,
+    player(X,Y),
+    asserta(place('% ',X,Y)),
     write('-------------- \33\[38;5;76mKamu menggali tanah ini !\33\[0m --------------'),nl, 
     w,!.
-
 dig :- runProgram(_),
     inventory(CurrentInventory),
     \+is_member(i1,CurrentInventory,Index),

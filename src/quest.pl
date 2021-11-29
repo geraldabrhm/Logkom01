@@ -81,3 +81,46 @@ updateQuestRanch(jumlah):-
             write('Selamat!, quest ranching telah selesai')
     ),
     retract(listQuest(ranching,_)),asserta(listQuest(ranching,NewValue)).
+updateQuestRanch(Jumlah):-
+    listQuest(ranching,ValueOfRanch),
+    NewValue is ValueOfRanch - Jumlah,
+    (
+        NewValue > 0 ->
+            write('Quest ranching tersisa '),write(NewValue),write(' Item'),nl;
+        NewValue =< 0 ->
+            write('Selamat!, quest ranching telah selesai'),nl
+    ),
+    retract(listQuest(ranching,_)),asserta(listQuest(ranching,NewValue)).
+
+updateQuestFishing(Jumlah):-
+    listQuest(fishing,ValueOfFishing),
+    NewValue is ValueOfFishing - Jumlah,
+    (
+        NewValue > 0 ->
+            write('Quest Fishing tersisa '),write(NewValue),write(' Item'),nl;
+        NewValue =< 0 ->
+            write('Selamat!, quest Fishing telah selesai'),nl
+    ),
+    retract(listQuest(fishing,_)),asserta(listQuest(fishing,NewValue)).
+
+/*
+updateQuestFarming(Jumlah):-
+    listQuest(ranching,ValueOfFarm),
+    NewValue is ValueOfFarm - Jumlah,
+    (
+        NewValue > 0 ->
+            write('Quest farming tersisa '),write(NewValue),write(' Item'),nl;
+        NewValue =< 0 ->
+            write('Selamat!, quest farming telah selesai'),nl
+    ),
+    retract(listQuest(harvesting,_)),asserta(listQuest(ranching,NewValue)). */
+
+/* buat testing doang bang
+testUpdateQuest:-
+    write('Masukkan jumlah : '),read(X),nl,updateQuestFishing(X).
+*/
+
+updateWholeQuest:-
+    listQuest(ranching,0),listQuest(fishing,0),listQuest(harvesting,0),
+    write('Selamat Anda telah berhasil menyelesaikan semua quest'),
+    retract(haveQuest(_)),asserta(haveQuest(no)).
