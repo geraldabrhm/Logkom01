@@ -44,7 +44,10 @@ harvestingQ :- listQuest(harvesting,HarvestValue),
                     write('0 harvest item'),nl
                 ).
 
+inPlace :- player(X,Y), place('Q',X,Y).
+
 quest:-
+    inPlace, !,
     haveQuest(Bool),
         (Bool = no -> 
             takeQuest,
@@ -57,6 +60,8 @@ quest:-
             fishingQ,
             harvestingQ
         ).
+
+quest:- write('Pergi ke tempat Quest dulu bos!'), nl.
 
 updateQuestRanch(jumlah):-
     listQuest(ranching,ValueOfRanch),

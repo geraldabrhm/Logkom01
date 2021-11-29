@@ -93,7 +93,10 @@ addWool :-
     ((N =:= 0) -> write('There is no wool you can get now'))).
     % [Nanti nambah exp player juga di sini]
 
+inRanch :- player(X,Y), place('R',X,Y).
+
 ranch :-
+    inRanch, !,
     updateLevel,
     updateTime,
     updateTimeRanch,
@@ -102,3 +105,5 @@ ranch :-
     (((PickedAnimal = 'chicken') -> (addEgg));
     ((PickedAnimal = 'cow') -> (addMilk));
     ((PickedAnimal = 'sheep') -> (addWool))).
+
+ranch :- write('Pergi ke peternakan dulu bos!'), nl.
