@@ -8,7 +8,7 @@
 /* M: Marketplace, R: Ranch, H: House, Q: Tempat pengambilan quest, o: Tile air, =: Digged tile */
 
 place('H',7,6).
-place('Q',7,3)..
+place('Q',7,3).
 place('R',10,5).
 place('M',10,12).
 tile_water(5,8).
