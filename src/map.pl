@@ -29,7 +29,7 @@ map_size(14,17).
 isWallTile(X,Y):- X=:=0;Y=:=0;X=:=15;Y=:=18.
 
 /* tile check buat digging */
-isRawTile(X,Y):-\+tile_water(X,Y),\+place(_,X,Y),\+isWallTile(X,Y).
+isRawTile(X,Y) :- \+tile_water(X,Y),\+place(_,X,Y),\+isWallTile(X,Y).
 
 % MAP
 % RIGHT BORDER

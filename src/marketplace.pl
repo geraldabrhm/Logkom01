@@ -161,8 +161,8 @@ market:-
             ( NewUang >= 20000 -> 
                 write('Selamat anda berhasil mengumpulkan 20000 gold'), nl,
                 write('Semua hutang anda dapat dilunaskan berkat kerja keras Anda selama ini!'), nl,
-                quitEnd.
-            ).
+                quitEnd
+            )
     ).
 
 market :- write('Pergi ke market dulu bos!'),nl.

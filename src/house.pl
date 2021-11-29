@@ -5,7 +5,7 @@ sleep :-
     days(X),
     playerMoney(Y),
     X =:= 365,
-    Y < 20000, !
+    Y < 20000, !,
     isInHouse,
     write('You have worked hard, but in the end result is all that matters.'), nl,
     write('May God bless you in the future with kind people!'), nl,

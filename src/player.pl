@@ -26,7 +26,7 @@ addExpRanching(Y) :-
     expRanching(X1),
     Z is Y * 2,
     X is X1 + Z,
-    write('Dapet '), write(Z) write(' xp bos!'), nl,
+    write('Dapet '), write(Z), write(' xp bos!'), nl,
     addExpGeneral(Z),
     ( A =< 4 -> retract(expRanching(X1)),asserta(expRanching(X))),
     (   X >= 300, A =:= 1 -> retract(lvlRanching(1)), asserta(lvlRanching(2)), resetExpRanching;
@@ -38,7 +38,7 @@ addExpRanching(Y) :-
     lvlRanching(A),
     expRanching(X1),
     X is X1 + Y,
-    write('Dapet '), write(Y) write(' xp bos!'), nl,
+    write('Dapet '), write(Y), write(' xp bos!'), nl,
     addExpGeneral(Y),
     ( A =< 4 -> retract(expRanching(X1)),asserta(expRanching(X))),
     (   X >= 300, A =:= 1 -> retract(lvlRanching(1)), asserta(lvlRanching(2)), resetExpRanching;
@@ -52,7 +52,7 @@ addExpFishing(Y) :-
     expFishing(X1),
     Z is Y * 2,
     X is X1 + Z,
-    write('Dapet '), write(Z) write(' xp bos!'), nl,
+    write('Dapet '), write(Z), write(' xp bos!'), nl,
     addExpGeneral(Z),
     ( A =< 4 -> retract(expFishing(X1)), asserta(expFishing(X))),
     (   X >= 300, A =:= 1 -> retract(lvlFishing(1)), asserta(lvlFishing(2)), resetExpFishing;
@@ -64,7 +64,7 @@ addExpFishing(Y) :-
     lvlFishing(A),
     expFishing(X1),
     X is X1 + Y,
-    write('Dapet '), write(Y) write(' xp bos!'), nl,
+    write('Dapet '), write(Y), write(' xp bos!'), nl,
     addExpGeneral(Y),
     ( A =< 4 -> retract(expFishing(X1)), asserta(expFishing(X))),
     (   X >= 300, A =:= 1 -> retract(lvlFishing(1)), asserta(lvlFishing(2)), resetExpFishing;
@@ -78,7 +78,7 @@ addExpFarming(Y) :-
     expFarming(X1),
     Z is Y * 2,
     X is X1 + Z,
-    write('Dapet '), write(Z) write(' xp bos!'), nl,
+    write('Dapet '), write(Z), write(' xp bos!'), nl,
     addExpGeneral(Z),
     ( A =< 4 -> retract(expFishing(X1)), asserta(expFishing(X))),
     (   X >= 300, A =:= 1 -> retract(lvlFarming(1)), asserta(lvlFarming(2)), resetExpFarming;
@@ -90,7 +90,7 @@ addExpFarming(Y) :-
     lvlFarming(A),
     expFarming(X1),
     X is X1 + Y,
-    write('Dapet '), write(Y) write(' xp bos!'), nl,
+    write('Dapet '), write(Y), write(' xp bos!'), nl,
     addExpGeneral(Y),
     ( A =< 4 -> retract(expFishing(X1)), asserta(expFishing(X))),
     (   X >= 300, A =:= 1 -> retract(lvlFarming(1)), asserta(lvlFarming(2)), resetExpFarming;
