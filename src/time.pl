@@ -4,42 +4,43 @@
 days(1).
 hours(6).
 
-NotLateNight :-
+lateNight :-
     hours(X),
-    Y < 22.
+    X >= 22.
 
-DisplayTime :-
+displayTime :-
     days(X),
     hours(Y),
     Y < 22, !,
-    write('Day : '),
+    write('Hari : '),
     write(X), nl,
-    write('Hour :'),
+    write('Jam : '),
     write(Y), nl.
 
-DisplayTime :-
+displayTime :-
     days(X),
     write('Day : '),
     write(X), nl,
-    write('It\'s late night. Time to sleep'), nl.
+    write('Udah malem bos, waktunya tidur!'), nl.
 
-days(X) :-
-    addDay(Y),
+addDay(Y) :-
     days(X1),
-    X is X1 + Y.
-
-hours(6) :- 
-    setHourDawn.
-
-hours(X) :-
-    hours(X1),
-    X1 <= 22, !,
-    addHour(Y),
     X is X1 + Y,
-    X <= 22.
+    retract(days(X1)),
+    asserta(days(X)).
 
-hours(22) :-
+setHourDawn :- 
+    retract(hours(_)),
+    asserta(hours(6)).
 
-addHour(X) :-
-addDay(X) :-
+addHour(Y) :-
+    hours(X1),
+    X is X1 + Y,
+    X =< 22, !,
+    retract(hours(X1)),
+    asserta(hours(X)).
 
+addHour(_) :-
+    retract(hours(_)),
+    asserta(hours(22)),
+    write('Udah malem bos, waktunya tidur!'), nl.

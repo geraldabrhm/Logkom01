@@ -4,7 +4,6 @@
 :- dynamic(timeToExploit/1).
 :- dynamic(collOfRanchItem/3).
 :- dynamic(timeRanch/1).
-%:- dynamic(hours/1).
 
 
 % exp(A, B): exp yang didapat dari A adalah B ketika di-collect

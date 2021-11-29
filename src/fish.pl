@@ -47,15 +47,20 @@ fish5 :-
 	).
 
 % Main fish (belum add waktu)
+fish :- lateNight, !, write('Udah malem bos, waktunya tidur!'), nl.
+
 fish :-
 	isCanFish, !,
-	NotLateNight, !,
 	level(X),
 	(	X == 1 -> fish1;
 		X == 2 -> fish2;
 		X == 3 -> fish3;
 		X == 4 -> fish4;
 		X == 5 -> fish5
+	),inven(17,_,_,_,_,Y),
+	(	Y == 1 -> addHour(3);
+		Y == 2 -> addHour(2);
+		Y == 3 -> addHour(1)
 	).
 
 fish :- write('Nggak ada air bos!'), nl.
