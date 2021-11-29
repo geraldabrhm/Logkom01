@@ -30,7 +30,7 @@ addExpRanching(Y) :-
     (   X >= 300, A =:= 1 -> retract(lvlRanching(1)), asserta(lvlRanching(2)), resetExpRanching;
         X >= 500, A =:= 2 -> retract(lvlRanching(2)), asserta(lvlRanching(3)), resetExpRanching;
         X >= 1000, A =:= 3 -> retract(lvlRanching(3)), asserta(lvlRanching(4)), resetExpRanching;
-        X >= 1500, A =:= 4 -> retract(lvlRanching(4)), asserta(lvlRanching(5)), resetExpRanching;).
+        X >= 1500, A =:= 4 -> retract(lvlRanching(4)), asserta(lvlRanching(5)), resetExpRanching).
 
 addExpFishing(Y) :-
     lvlFishing(A),
@@ -42,7 +42,7 @@ addExpFishing(Y) :-
     (   X >= 300, A =:= 1 -> retract(lvlFishing(1)), asserta(lvlFishing(2)), resetExpFishing;
         X >= 500, A =:= 2 -> retract(lvlFishing(2)), asserta(lvlFishing(3)), resetExpFishing;
         X >= 1000, A =:= 3 -> retract(lvlFishing(3)), asserta(lvlFishing(4)), resetExpFishing;
-        X >= 1500, A =:= 4 -> retract(lvlFishing(4)), asserta(lvlFishing(5)), resetExpFishing;).
+        X >= 1500, A =:= 4 -> retract(lvlFishing(4)), asserta(lvlFishing(5)), resetExpFishing).
 
 addExpFarming(Y) :-
     lvlFarming(A),
@@ -54,7 +54,7 @@ addExpFarming(Y) :-
     (   X >= 300, A =:= 1 -> retract(lvlFarming(1)), asserta(lvlFarming(2)), resetExpFarming;
         X >= 500, A =:= 2 -> retract(lvlFarming(2)), asserta(lvlFarming(3)), resetExpFarming;
         X >= 1000, A =:= 3 -> retract(lvlFarming(3)), asserta(lvlFarming(4)), resetExpFarming;
-        X >= 1500, A =:= 4 -> retract(lvlFarming(4)), asserta(lvlFarming(5)), resetExpFarming;).
+        X >= 1500, A =:= 4 -> retract(lvlFarming(4)), asserta(lvlFarming(5)), resetExpFarming).
 
 addExpGeneral(Y):-
     lvlGeneral(B1),
@@ -67,15 +67,18 @@ addExpGeneral(Y):-
 % reset exp
 resetExpRanching :-
     retract(expRanching(_)),
-    asserta(expRanching(0)).
+    asserta(expRanching(0)),
+    write('Selamat, naik level fishing bos!'),nl.
 
 resetExpFishing :-
     retract(expFishing(_)),
-    asserta(expFishing(0)).
+    asserta(expFishing(0)),
+    write('Selamat, naik level ranching bos!'),nl.
 
 resetExpFarming :-
     retract(expFarming(_)),
-    asserta(expFarming(0)).
+    asserta(expFarming(0)),
+    write('Selamat, naik level farming bos!'),nl.
 
 resetExpGeneral :-
     retract(expGeneral(_)),
@@ -92,16 +95,15 @@ status :-
     specialty(H),
     lvlGeneral(X),
     expGeneral(Y),
-    write('Your status : '), nl
-
-    write('Job : '), write(H), nl
-    write('Level : '),write(X), nl
-    write('Level Farming : '), write(A), nl
-    write('Exp Farming : '), write(D), nl
-    write('Level Fishing : '), write(B), nl
-    write('Exp Fishing : '), write(E), nl
-    write('Level Ranching : '), write(C), nl
-    write('Exp Ranching : '), write(F), nl
-    write('Gold : '), write(G), nl
+    write('Your status : '), nl,
+    write('Job : '), write(H), nl,
+    write('Level : '),write(X), nl,
+    write('Level Farming : '), write(A), nl,
+    write('Exp Farming : '), write(D), nl,
+    write('Level Fishing : '), write(B), nl,
+    write('Exp Fishing : '), write(E), nl,
+    write('Level Ranching : '), write(C), nl,
+    write('Exp Ranching : '), write(F), nl,
+    write('Gold : '), write(G), nl,
     write('Exp : '), write(Y), write('/1000'), nl.
 
