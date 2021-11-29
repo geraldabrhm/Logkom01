@@ -17,7 +17,7 @@ start :-
     ['marketplace.pl'],
     ['house.pl'],
     ['time.pl'],
-    %['farm.pl'],
+    ['farm.pl'],
     ['ranch.pl'],
     ['fish.pl'],
 
@@ -33,9 +33,9 @@ start :-
 
     read(Job),
     (
-    Job =:= 1 -> assertz(specialty(fisherman));
-    Job =:= 2 -> assertz(specialty(farmer));
-    Job =:= 3 -> assertz(specialty(rancher))
+    Job =:= 1 -> assertz(specialty(fisherman)), write('Anda memilih fisherman!'), nl;
+    Job =:= 2 -> assertz(specialty(farmer)), write('Anda memilih farmer!'), nl;
+    Job =:= 3 -> assertz(specialty(rancher)), write('Anda memilih rancher!'), nl
     ),
     write('The game already started. Use command \'help.\' for guide'),nl.
 

@@ -5,7 +5,6 @@ isCanFish :-
 	player(X,Y), A is X-1, tile_water(A,Y), !;
 	player(X,Y), D is X+1, tile_water(D,Y).
 
-% Belum add EXP
 addCatfish :-
 	addItem(1,1).
 addSalmon :-
@@ -14,44 +13,83 @@ addTuna :-
 	addItem(3,1).
 
 % Kondisi Fishing tiap level
-fish1 :- 
+fish1 :-
+	specialty(fisherman), !,
 	random(1,101,N),
-	(	N > 0, N =< 50 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl;
-		N > 50, N =< 100 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish
+	(	N > 0, N =< 50 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 20 xp bos!'), nl, addExpFishing(20);
+		N > 50, N =< 100 -> write('Selamat bos! dapet lele'), nl, write('Dapet 40 xp bos!'), nl, addCatfish, addExpFishing(40)
+	).
+fish1 :-
+	random(1,101,N),
+	(	N > 0, N =< 50 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl, addExpFishing(10);
+		N > 50, N =< 100 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish, addExpFishing(20)
+	).
+
+fish2 :-
+	specialty(fisherman), !,
+	random(1,101,N),
+	(	N > 0, N =< 45 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 20 xp bos!'), nl, addExpFishing(20);
+		N > 45, N =< 85 -> write('Selamat bos! dapet lele'), nl, write('Dapet 40 xp bos!'), nl, addCatfish, addExpFishing(40);
+		N > 85, N =< 100 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 70 xp bos!'), nl, addSalmon, addExpFishing(70)
 	).
 fish2 :-
 	random(1,101,N),
-	(	N > 0, N =< 45 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl;
-		N > 45, N =< 85 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish;
-		N > 85, N =< 100 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 35 xp bos!'), nl, addSalmon
+	(	N > 0, N =< 45 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl, addExpFishing(10);
+		N > 45, N =< 85 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish, addExpFishing(20);
+		N > 85, N =< 100 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 35 xp bos!'), nl, addSalmon, addExpFishing(35)
+	).
+
+fish3 :-
+	specialty(fisherman), !,
+	random(1,101,N),
+	(	N > 0, N =< 40 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 20 xp bos!'), nl, addExpFishing(20);
+		N > 40, N =< 80 -> write('Selamat bos! dapet lele'), nl, write('Dapet 40 xp bos!'), nl, addCatfish, addExpFishing(40);
+		N > 80, N =< 100 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 70 xp bos!'), nl, addSalmon, addExpFishing(70)
 	).
 fish3 :-
 	random(1,101,N),
-	(	N > 0, N =< 40 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl;
-		N > 40, N =< 80 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish;
-		N > 80, N =< 100 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 35 xp bos!'), nl, addSalmon
+	(	N > 0, N =< 40 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl, addExpFishing(10);
+		N > 40, N =< 80 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish, addExpFishing(20);
+		N > 80, N =< 100 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 35 xp bos!'), nl, addSalmon, addExpFishing(35)
+	).
+
+fish4 :-
+	specialty(fisherman), !,
+	random(1,101,N),
+	(	N > 0, N =< 30 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 20 xp bos!'), nl, addExpFishing(20);
+		N > 30, N =< 70 -> write('Selamat bos! dapet lele'), nl, write('Dapet 40 xp bos!'), nl, addCatfish, addExpFishing(40);
+		N > 70, N =< 95 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 70 xp bos!'), nl, addSalmon, addExpFishing(70);
+		N > 95, N =< 100 -> write('Selamat bos! dapet tuna'), nl, write('Dapet 100 xp bos!'), nl, addTuna, addExpFishing(100)
 	).
 fish4 :-
 	random(1,101,N),
-	(	N > 0, N =< 30 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl;
-		N > 30, N =< 70 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish;
-		N > 70, N =< 95 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 35 xp bos!'), nl, addSalmon;
-		N > 95, N =< 100 -> write('Selamat bos! dapet tuna'), nl, write('Dapet 50 xp bos!'), nl, addTuna
+	(	N > 0, N =< 30 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl, addExpFishing(10);
+		N > 30, N =< 70 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish, addExpFishing(20);
+		N > 70, N =< 95 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 35 xp bos!'), nl, addSalmon, addExpFishing(35);
+		N > 95, N =< 100 -> write('Selamat bos! dapet tuna'), nl, write('Dapet 50 xp bos!'), nl, addTuna, addExpFishing(50)
+	).
+
+fish5 :-
+	specialty(fisherman), !,
+	random(1,101,N),
+	(	N > 0, N =< 25 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 20 xp bos!'), nl, addExpFishing(20);
+		N > 25, N =< 65 -> write('Selamat bos! dapet lele'), nl, write('Dapet 40 xp bos!'), nl, addCatfish, addExpFishing(40);
+		N > 65, N =< 90 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 70 xp bos!'), nl, addSalmon, addExpFishing(70);
+		N > 90, N =< 100 -> write('Selamat bos! dapet tuna'), nl, write('Dapet 100 xp bos!'), nl, addTuna, addExpFishing(100)
 	).
 fish5 :-
 	random(1,101,N),
-	(	N > 0, N =< 25 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl;
-		N > 25, N =< 65 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish;
-		N > 65, N =< 90 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 35 xp bos!'), nl, addSalmon;
-		N > 90, N =< 100 -> write('Selamat bos! dapet tuna'), nl, write('Dapet 50 xp bos!'), nl, addTuna
+	(	N > 0, N =< 25 -> write('Gadapet apa-apa bos!'), nl, write('Dapet 10 xp bos!'), nl, addExpFishing(10);
+		N > 25, N =< 65 -> write('Selamat bos! dapet lele'), nl, write('Dapet 20 xp bos!'), nl, addCatfish, addExpFishing(20);
+		N > 65, N =< 90 -> write('Selamat bos! dapet salmon'), nl, write('Dapet 35 xp bos!'), nl, addSalmon, addExpFishing(35);
+		N > 90, N =< 100 -> write('Selamat bos! dapet tuna'), nl, write('Dapet 50 xp bos!'), nl, addTuna, addExpFishing(50)
 	).
 
-% Main fish (belum add waktu)
 fish :- lateNight, !, write('Udah malem bos, waktunya tidur!'), nl.
 
 fish :-
 	isCanFish, !,
-	level(X),
+	lvlFishing(X),
 	(	X == 1 -> fish1;
 		X == 2 -> fish2;
 		X == 3 -> fish3;
