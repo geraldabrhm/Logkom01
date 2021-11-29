@@ -2,7 +2,7 @@
 :- dynamic(hours/1).
 
 isInHouse :-
-    player(X,Y), X =:= 7, Y =:= 6.
+    player(X,Y), place('H',X,Y).
 
 sleep :- 
     isInHouse, !,

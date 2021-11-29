@@ -16,6 +16,7 @@ start :-
     %['player.pl'],
     ['marketplace.pl'],
     %['house.pl'],
+    %['time.pl'],
     %['farm.pl'],
     ['ranch.pl'],
     ['fish.pl'],

@@ -1,4 +1,3 @@
-level(1).
 % Cek posisi player
 isCanFish :- 
 	player(X,Y), W is Y-1, tile_water(X,W), !;

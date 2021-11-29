@@ -3,8 +3,10 @@
 /*sementara, nanti diganti sama yang dari mekanisme player */
 playerMoney(5000).
 
+inMarket :- player(X,Y), place('M',X,Y).
 
 market:-
+    inMarket, !,
     write('Mau ngapain ? '),nl,
     write('1. buy'),nl,
     write('2. sell'),nl,
@@ -155,3 +157,5 @@ market:-
             write('Jumlah terlalu banyak !'),nl
             )
     ).
+
+market :- write('Pergi ke market dulu bos!'),nl.
