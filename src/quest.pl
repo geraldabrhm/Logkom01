@@ -119,3 +119,8 @@ updateQuestFarming(Jumlah):-
 testUpdateQuest:-
     write('Masukkan jumlah : '),read(X),nl,updateQuestFishing(X).
 */
+
+updateWholeQuest:-
+    listQuest(ranching,0),listQuest(fishing,0),listQuest(harvesting,0),
+    write('Selamat Anda telah berhasil menyelesaikan semua quest'),
+    retract(haveQuest(_)),asserta(haveQuest(no)).
