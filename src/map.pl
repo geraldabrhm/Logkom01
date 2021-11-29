@@ -90,15 +90,7 @@ draw_point(X, Y) :- map_size(W, H),
 					write('o '),
 					NewX is X+1,
 					draw_point(NewX, Y).
-draw_point(X, Y) :- map_size(W, H),
-					X < W + 1,
-					X > 0,
-					Y < H + 1,
-					Y > 0,
-					harvestTile(Obj, X, Y), !,
-					write(Obj),write(' '),
-					NewX is X+1,
-					draw_point(NewX, Y).
+
 % EMPTY TILE					
 draw_point(X, Y) :- map_size(W, H),
 					X < W + 1,
