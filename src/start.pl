@@ -13,7 +13,7 @@ start :-
     ['help.pl'],
     ['interface.pl'],
     ['quest.pl'],
-    %['player.pl'],
+    ['player.pl'],
     ['marketplace.pl'],
     ['house.pl'],
     ['time.pl'],
