@@ -60,32 +60,51 @@ addSheep(N) :-
 
 % addSomething: Menambahkan Something sejumlah N ke inventory dan mengurangi collOfRanchItem
 addEgg :-
-    collOfRanchItem(Amount1, Amount2, Amount3),
-    N is Amount1,
-    retract(collOfRanchItem(_,_,_)), asserta(collOfRanchItem(0, Amount2, Amount3)),
-	% retract(item(13,egg,X,100,0,0)), NewX is X+N, asserta(item(13,egg,NewX,100,0,0)), % ekuivalen sama addItem(13, N)
+    (collOfRanchItem(Amount1, Amount2, Amount3),
+    N is Amount1),
+    (((N =\= 0) -> (retract(collOfRanchItem(_,_,_)), asserta(collOfRanchItem(0, Amount2, Amount3)),
+	% retract(item(13,egg,X,100,0,0)), NewX is X+N, asserta(item(13,egg,NewX,100,0,0)), % ekivalen sama addItem(13, N)
     addItem(13, N),
     exp(egg, Val),
     expRanching(Before),
-    retract(expRanching(_)), asserta(expRanching(Before + (Val * N))).
+    ExpAfter is Before + (Val * N),
+    retract(expRanching(_)), asserta(expRanching(ExpAfter)),
+    write('You just exploit chicken and get '), write(N), write(' egg and put it in your inventory')));
+    ((N =:= 0) -> write('There is no egg you can get now'))).
     % [Nanti nambah exp player juga di sini]
 addMilk :-
-    collOfRanchItem(Amount1, Amount2, Amount3),
-    N is Amount2,
-    retract(collOfRanchItem(_,_,_)), asserta(collOfRanchItem(Amount1, 0, Amount3)),
-	% retract(item(14,milk,X,400,0,0)), NewX is X+N, asserta(item(14,milk,NewX,400,0,0)), % ekuivalen sama addItem(14, N)
+    (collOfRanchItem(Amount1, Amount2, Amount3),
+    N is Amount2),
+    (((N =\= 0) -> (retract(collOfRanchItem(_,_,_)), asserta(collOfRanchItem(Amount1, 0, Amount3)),
+	% retract(item(14,milk,X,400,0,0)), NewX is X+N, asserta(item(14,milk,NewX,400,0,0)), % ekivalen sama addItem(14, N)
     addItem(14, N),
     exp(milk, Val),
     expRanching(Before),
-    retract(expRanching(_)), asserta(expRanching(Before + (Val * N))).
+    ExpAfter is Before + (Val * N),
+    retract(expRanching(_)), asserta(expRanching(ExpAfter)),
+    write('You just exploit cow and get '), write(N), write(' milk and put it in your inventory')));
+    ((N =:= 0) -> write('There is no milk you can get now'))).
     % [Nanti nambah exp player juga di sini]
 addWool :-
-    collOfRanchItem(Amount1, Amount2, Amount3),
-    N is Amount3,
-    retract(collOfRanchItem(_,_,_)), asserta(collOfRanchItem(Amount1, Amount2, 0)),
-	% retract(item(15,wool,0,750,0,0)), NewX is X+N, asserta(item(15,wool,NewX,750,0,0)), % ekuivalen sama addItem(15, N)
+    (collOfRanchItem(Amount1, Amount2, Amount3),
+    N is Amount3),
+    (((N =\= 0) -> (retract(collOfRanchItem(_,_,_)), asserta(collOfRanchItem(Amount1, Amount2, 0)),
+	% retract(item(13,egg,X,100,0,0)), NewX is X+N, asserta(item(13,egg,NewX,100,0,0)), % ekivalen sama addItem(15, N)
     addItem(15, N),
     exp(wool, Val),
     expRanching(Before),
-    retract(expRanching(_)), asserta(expRanching(Before + (Val * N))).
+    ExpAfter is Before + (Val * N),
+    retract(expRanching(_)), asserta(expRanching(ExpAfter)),
+    write('You just exploit sheep and get '), write(N), write(' wool and put it in your inventory')));
+    ((N =:= 0) -> write('There is no wool you can get now'))).
     % [Nanti nambah exp player juga di sini]
+
+ranch :-
+    updateLevel,
+    updateTime,
+    updateTimeRanch,
+    write('What animal you want to exploit (You can type chicken., cow., or sheep.): '), nl,
+    read(PickedAnimal),
+    (((PickedAnimal = 'chicken') -> (addEgg));
+    ((PickedAnimal = 'cow') -> (addMilk));
+    ((PickedAnimal = 'sheep') -> (addWool))).
