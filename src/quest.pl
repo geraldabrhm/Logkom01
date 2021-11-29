@@ -57,3 +57,14 @@ quest:-
             fishingQ,
             harvestingQ
         ).
+
+updateQuestRanch(jumlah):-
+    listQuest(ranching,ValueOfRanch),
+    NewValue is ValueOfRanch - jumlah,
+    (
+        NewValue > 0 ->
+            write('Quest ranching tersisa '),write(NewValue),write(' Item');
+        NewValue =< 0 ->
+            write('Selamat!, quest ranching telah selesai')
+    ),
+    retract(listQuest(ranching,_)),asserta(listQuest(ranching,NewValue)).
