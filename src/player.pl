@@ -1,7 +1,9 @@
 :- dynamic(lvlRanching/1).
 :- dynamic(lvlFishing/1).
 :- dynamic(lvlFarming/1).
-
+:- dynamic(expRanching/1).
+:- dynamic(expFishing/1).
+:- dynamic(expFarming/1).
 
 % inisiasi level
 lvlRanching(1).
@@ -117,3 +119,23 @@ expFarming(0) :-
 addExpRanching(Y) :-
 addExpFishing(Y) :-
 addExpFarming(Y) :-
+
+status :- 
+    lvlFarming(A),
+    lvlFishing(B),
+    lvlRanching(C),
+    expFarming(D),
+    expFishing(E),
+    expRanching(F),
+    playerMoney(G),
+    specialty(H),
+    write('Your status : '), nl
+    write('Job : '), write(H), nl
+    write('Level Farming : '), write(A), nl
+    write('Exp Farming : '), write(D), nl
+    write('Level Fishing : '), write(B), nl
+    write('Exp Fishing : '), write(E), nl
+    write('Level Ranching : '), write(C), nl
+    write('Exp Ranching : '), write(F), nl
+    write('Gold : '), write(G), nl
+
