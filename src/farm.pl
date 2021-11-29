@@ -47,11 +47,19 @@ harvest :-
     player(X,Y),
     plantTile(H,N,X,Y), N =< 0, !,
     lvlFarming(L),
-    (   L == 1 -> random(1,11,)
-        (   H == 'J' -> addItem(4,1), updateQuestFarming(1), retract(planTile(H,N,X,Y)), retract(place(_,X,Y));
-            H == 'K' -> addItem(5,1), updateQuestFarming(1), retract(planTile(H,N,X,Y)), retract(place(_,X,Y));
-            H == 'T' -> addItem(6,1), updateQuestFarming(1), retract(planTile(H,N,X,Y)), retract(place(_,X,Y))
-        )
+    (   L == 1 -> random(1,11,Random),
+        (   random =:= 1 ->
+            (   H == 'J' -> addItem(4,2), updateQuestFarming(2), addExpFarming(50), retract(planTile(H,N,X,Y)), retract(place(_,X,Y));
+                H == 'K' -> addItem(5,2), updateQuestFarming(2), addExpFarming(80), retract(planTile(H,N,X,Y)), retract(place(_,X,Y));
+                H == 'T' -> addItem(6,2), updateQuestFarming(2), addExpFarming(30), retract(planTile(H,N,X,Y)), retract(place(_,X,Y))
+            );
+            random > 1 ->
+            (   H == 'J' -> addItem(4,1), updateQuestFarming(1), addExpFarming(25), retract(planTile(H,N,X,Y)), retract(place(_,X,Y));
+                H == 'K' -> addItem(5,1), updateQuestFarming(1), addExpFarming(40), retract(planTile(H,N,X,Y)), retract(place(_,X,Y));
+                H == 'T' -> addItem(6,1), updateQuestFarming(1), addExpFarming(15), retract(planTile(H,N,X,Y)), retract(place(_,X,Y))
+            )
+        );
+        L == 2 -> random
     ).
     
 harvest :-

@@ -125,7 +125,6 @@ addWool :-
     % hoursTaken(Sblm), P is II * N + Sblm, retract(hoursTaken(_)), asserta(hoursTaken(P))
     ((N =:= 0) -> (write('Wolnya udah abis nih bos, lain kali ambilnya'), nl))),
     addExpGeneral(To).
-    % [Nanti nambah exp player juga di sini]
 
 inRanch :- player(X,Y), place('R',X,Y).
 
