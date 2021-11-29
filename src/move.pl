@@ -1,4 +1,3 @@
-/* belum handle moving object (dig tile) */
 :- dynamic(player/2).
 
 player(7,6).
@@ -24,11 +23,11 @@ w :- player(X,Y),W is Y-1,
 			write('Ketik "ranch" untuk masuk ke dalam peternakan'),nl;
 		place('H',X,W) ->
 			retract(player(X,Y)),assertz(player(X,W)),
-			write('Ketik "house" untuk masuk ke dalam rumah'),nl;
+			write('Ketik "sleep" untuk beristirahat'),nl;
 		place('M',X,W) ->
 			retract(player(X,Y)),assertz(player(X,W)),
 			write('Ketik "market" untuk melakukan jual beli'),nl
-	),map.
+	),addHour(1),map.
 s :- player(X,Y),S is Y+1,
 	(
 		toGetWalk(X,S) ->
@@ -45,11 +44,11 @@ s :- player(X,Y),S is Y+1,
 			write('Ketik "ranch" untuk masuk ke dalam peternakan'),nl;
 		place('H',X,S) ->
 			retract(player(X,Y)),assertz(player(X,S)),
-			write('Ketik "house" untuk masuk ke dalam rumah'),nl;
+			write('Ketik "sleep" untuk beristirahat'),nl;
 		place('M',X,S) ->
 			retract(player(X,Y)),assertz(player(X,S)),
 			write('Ketik "market" untuk melakukan jual beli'),nl
-	),map.
+	),addHour(1),map.
 a :- player(X,Y),A is X-1,
 	(
 		toGetWalk(A,Y) ->
@@ -66,11 +65,11 @@ a :- player(X,Y),A is X-1,
 			write('Ketik "ranch" untuk masuk ke dalam peternakan'),nl;
 		place('H',A,Y) ->
 			retract(player(X,Y)),assertz(player(A,Y)),
-			write('Ketik "house" untuk masuk ke dalam rumah'),nl;
+			write('Ketik "sleep" untuk beristirahat'),nl;
 		place('M',A,Y) ->
 			retract(player(X,Y)),assertz(player(A,Y)),
 			write('Ketik "market" untuk melakukan jual beli'),nl
-	),map.
+	),addHour(1),map.
 d :- player(X,Y),D is X+1,
 	(
 		toGetWalk(D,Y) ->
@@ -87,8 +86,8 @@ d :- player(X,Y),D is X+1,
 			write('Ketik "ranch" untuk masuk ke dalam peternakan'),nl;
 		place('H',D,Y) ->
 			retract(player(X,Y)),assertz(player(D,Y)),
-			write('Ketik "house" untuk masuk ke dalam rumah'),nl;
+			write('Ketik "sleep" untuk beristirahat'),nl;
 		place('M',D,Y) ->
 			retract(player(X,Y)),assertz(player(D,Y)),
 			write('Ketik "market" untuk melakukan jual beli'),nl
-	),map.
+	),addHour(1),map.

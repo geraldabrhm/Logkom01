@@ -128,6 +128,7 @@ addWool :-
 
 inRanch :- player(X,Y), place('R',X,Y).
 
+ranch :- lateNight, !, write('Udah malem bos, waktunya tidur!'), nl.
 ranch :-
     inRanch, !,
     updateLevel,

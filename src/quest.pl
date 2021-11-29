@@ -46,6 +46,8 @@ harvestingQ :- listQuest(harvesting,HarvestValue),
 
 inPlace :- player(X,Y), place('Q',X,Y).
 
+quest :- lateNight, !, write('Udah malem bos, waktunya tidur!'), nl.
+
 quest:-
     inPlace, !,
     haveQuest(Bool),

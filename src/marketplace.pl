@@ -5,6 +5,8 @@ playerMoney(1000).
 
 inMarket :- player(X,Y), place('M',X,Y).
 
+market :- lateNight, !, write('Udah malem bos, waktunya tidur!'), nl.
+
 market:-
     inMarket, !,
     write('Mau ngapain ? '),nl,
