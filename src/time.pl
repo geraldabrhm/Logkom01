@@ -28,7 +28,7 @@ addDay(Y) :-
     X is X1 + Y,
     retract(days(X1)),
     asserta(days(X)),
-    mapHarvest(0,0).
+    once(mapHarvest(1,1)).
 
 setHourDawn :- 
     retract(hours(_)),

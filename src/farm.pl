@@ -130,7 +130,20 @@ harvest :-
 harvest :-
     write('Ga ada yang bisa dipanen bos!'),nl.
 
-mapHarvest(X,Y) :- map_size(W,H),
+mapHarvest(X,Y) :- 
+    map_size(W, H),
+    X =:= W + 1,
+    Y < H + 1,
+    NewY is Y+1,
+    mapHarvest(1, NewY).
+
+mapHarvest(X,Y) :-
+    map_size(W, H),
+    X =:= 1,
+    Y =:= H + 1, !.
+	
+mapHarvest(X,Y) :- 
+    map_size(W,H),
     X < W + 1,
     X > 0,
     Y < H + 1,
@@ -141,8 +154,12 @@ mapHarvest(X,Y) :- map_size(W,H),
     asserta(Nama,NewDurasi,X,Y),
     NewX is X+1,
     mapHarvest(NewX, Y).
-mapHarvest(X,Y) :- map_size(W, H),
-     X =:= W + 1,
-     Y =< H + 1,
-     NewY is Y+1,
-     mapHarvest(0, NewY).
+
+mapHarvest(X,Y) :- 
+    map_size(W,H),
+    X < W + 1,
+    X > 0,
+    Y < H + 1,
+    Y > 0,
+    NewX is X+1,
+    mapHarvest(NewX, Y).
