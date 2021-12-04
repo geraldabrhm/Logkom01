@@ -72,14 +72,16 @@ onGoing:-
     harvestingQ.
 
 onGoing :- write('Belum ada quest bos!'),nl.
+
 updateQuestRanch(Jumlah):-
     listQuest(ranching,ValueOfRanch),
+	ValueOfRanch > 0,
     NewValue is ValueOfRanch - Jumlah,
     (
         NewValue > 0 ->
             write('Quest ranching tersisa '),write(NewValue),write(' Item'),nl,
             retract(listQuest(ranching,_)),asserta(listQuest(ranching,NewValue));
-        NewValue =< 0 ->
+        NewValue =:= 0 ->
             write('Selamat!, quest ranching telah selesai'),nl,
             retract(listQuest(ranching,_)),asserta(listQuest(ranching,0))
     ),
@@ -87,12 +89,13 @@ updateQuestRanch(Jumlah):-
 
 updateQuestFish(Jumlah):-
     listQuest(fishing,ValueOfFishing),
+	ValueOfFishing > 0,
     NewValue is ValueOfFishing - Jumlah,
     (
         NewValue > 0 ->
             write('Quest Fishing tersisa '),write(NewValue),write(' Item'),nl,
                 retract(listQuest(fishing,_)),asserta(listQuest(fishing,NewValue));
-        NewValue =< 0 ->
+        NewValue =:= 0 ->
             write('Selamat!, quest Fishing telah selesai'),nl,
             retract(listQuest(fishing,_)),asserta(listQuest(fishing,0))
     ),
@@ -101,12 +104,13 @@ updateQuestFish(Jumlah):-
 
 updateQuestFarming(Jumlah):-
     listQuest(ranching,ValueOfFarm),
+	ValueOfFarm > 0,
     NewValue is ValueOfFarm - Jumlah,
     (
         NewValue > 0 ->
             write('Quest farming tersisa '),write(NewValue),write(' Item'),nl,
             retract(listQuest(harvesting,_)),asserta(listQuest(ranching,NewValue));
-        NewValue =< 0 ->
+        NewValue =:= 0 ->
             write('Selamat!, quest farming telah selesai'),nl,
             retract(listQuest(harvesting,_)),asserta(listQuest(ranching,0))
     ),
