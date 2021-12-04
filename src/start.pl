@@ -27,20 +27,24 @@ start :-
 
     printHouse,
     printWelcome,
+    pickJob,
+	
+    write('The game already started. Use command \'help.\' for guide'),nl.
+
+start :- write('Game udah dimulai bos!'), nl.
+
+pickJob :-
     write('This is Harvest Star. Choose your job'),nl,
     write('1. Fisherman'),nl,
     write('2. Farmer'),nl,
     write('3. Rancher'),nl,
-
     read(Job),
     (
     Job =:= 1 -> assertz(specialty(fisherman)), write('Anda memilih fisherman!'), nl;
     Job =:= 2 -> assertz(specialty(farmer)), write('Anda memilih farmer!'), nl;
-    Job =:= 3 -> assertz(specialty(rancher)), write('Anda memilih rancher!'), nl
-    ),
-    write('The game already started. Use command \'help.\' for guide'),nl.
-
-start :- write('Game udah dimulai bos!'), nl.
+    Job =:= 3 -> assertz(specialty(rancher)), write('Anda memilih rancher!'), nl;
+    pickJob
+    ).
 
 quit :- 
     game_started(true),
