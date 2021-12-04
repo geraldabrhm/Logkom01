@@ -146,10 +146,3 @@ throw:-
             throwItem(Id,JumlahBuang),
             write('Kamu telah membuang '),write(JumlahBuang),write(' '),write(NamaBuang),nl
     ).
-
-
-/*Buat Cek add Item */
-tambahSapi:-addItem(11,2).
-
-/* cek upgrade tools */
-upgradeShove:-upgradeTool(16,3).

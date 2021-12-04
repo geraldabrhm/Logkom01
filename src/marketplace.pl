@@ -10,11 +10,11 @@ market :- lateNight, !, write('Udah malem bos, waktunya tidur!'), nl.
 market:-
     inMarket, !,
     write('Mau ngapain ? '),nl,
-    write('1. buy'),nl,
-    write('2. sell'),nl,
-    write('Pilih (buy/sell): '),read(Pilihan),nl,
+    write('1. beli'),nl,
+    write('2. jual'),nl,
+    write('Pilih : '),read(Pilihan),nl,
     (
-        Pilihan == buy ->
+        Pilihan == 1 ->
             write('Item yang tersedia : '),nl,
             write('1. Corn seed (75 gold)'),nl,
             write('2. Potato seed (150 gold)'),nl,
@@ -143,7 +143,7 @@ market:-
                     );
                 write('List barang tidak tersedia !'),nl
             );
-        Pilihan == sell ->
+        Pilihan == 2 ->
             write('Item yang dapat anda jual dari Inventory : '),nl,
             rawDisplayMarket,
             write('Pilih Nama item : '),nl,read(PilihJual),nl,

@@ -3,9 +3,9 @@ isInHouse :-
 
 sleep :- 
     isInHouse, !,
+    addDay(1),
     days(X),
     playerMoney(Y),
-    addDay(1),
     ( X =:= 365, Y < 20000 ->
         write('You have worked hard, but in the end result is all that matters.'), nl,
         write('May God bless you in the future with kind people!'), nl,
