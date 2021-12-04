@@ -61,7 +61,12 @@ draw_point(X, Y) :- map_size(W, H),
 					Y =:= H + 1,
 					write('# '),
 					NewX is X+1,
-					draw_point(NewX, Y).					
+					draw_point(NewX, Y).
+% END OF DRAW_POINT
+draw_point(X, Y) :- map_size(W, H),
+					X =:= W + 1,
+					Y =:= H + 1,
+					!.
 % MAP INSIDE
 draw_point(X, Y) :- map_size(W, H),
 					X < W + 1,
@@ -104,4 +109,4 @@ draw_point(X, Y) :- map_size(W, H),
 					NewX is X+1,
 					draw_point(NewX, Y).
 
-map :- draw_point(0,0).
+map :- once(draw_point(0,0)).
